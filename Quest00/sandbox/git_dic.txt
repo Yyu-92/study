@@ -1,0 +1,15 @@
+* committed
+데이터가 로컬저장소에 저장
+* modified
+수정한 파일을 아직 로컬저장소에서 커밋하지 않음
+*staged
+곧 커밋할 예정으로 staging area에 들어가 있음
+
+
+* github의 기본 브랜치가 master에서 main으로 변경 됨
+	* 배경 : 인종차별적 요소나 주종 관계의 의미를 제거하고자하는 움직임
+	* 문제 : 초기화시 브랜치가 master로 변경이 됨(main이 사라짐)
+	* 해결방안 : 
+
+* pull request(PR)
+
