@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 	<head>
 		<meta charset="UTF-8">
 		<!-- TODO: 또 무엇이 필요할까요? -->
@@ -7,10 +7,14 @@
 		<meta name="keywords" content="네이버, 홈페이지, 네이버사이트">
 		<meta name="description" content="네이버 홈페이지 메인 페이지 입니다.">
 
+		<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+		<meta name="robots" content="index,follow">
+
 		<title>네이버 메인 페이지</title>
 
 		<!-- <link rel="stylesheet" href="main.css" /> -->
-		<link rel="" href="" />
+		<link rel="icon" href="" type="">
+		<link rel="stylesheet" href="" type="text/css">
 
 		<script src=""></script>
 
@@ -21,16 +25,19 @@
 
 			<div>
 				<div>
-					<div></div>
-					<div></div>
-					<div></div>
+					<a href="https://asidelink.com/" title="메뉴페이지이동">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
 				</div>
 				<div>
 					<a href="https://qrlink.com/" title="qr체크인이동">QR 체크인</a>
-					<a herf="https://paylink.com/" title="네이버페이이동"><img src="images/pay.png" alt="네이버페이"></a>
+					<a herf="https://paylink.com/" title="네이버페이이동"><img src="images/square-logo.png" alt="네이버페이">Pay</a>
 					<a herf="https://maillink.com/" title="메일이동"><img src="images/mail2.png" alt="메일"></a>
 				</div>
 			</div><!--top-head-->
+
 
 			<div>
 				<h1>
@@ -126,28 +133,30 @@
 		<section class="main">
 			<!-- TODO: main은 어떤 식으로 나눌 수 있을까요? -->
 
-			<section>
+			<article>
 				<div>
 					<i></i>
 					<p>10˚맑음 <span>어제보다 2˚ 높아요</sapn></p>
 				</div>
 
 				<div>
-					<h2>
-						<a href="https://nowlink.co/m" title="now이동">
-							<img src="images/now.png" alt="now">
-						</a>
+					<div>
+						<h2>
+							<a href="https://nowlink.co/m" title="now이동">
+								<img src="images/now.png" alt="now">
+							</a>
+						</h2>
 						<p>지금 방송중</p>
-					</h2>
+					</div>
 					<ul>
 						<li><a href="https://now1link.com/" title="nowlist1로이동"><img src="images/now-list1.png" alt="nowlist1"></a></li>
 						<li><a href="https://now2link.com/" title="nowlist2로이동"><img src="images/now-list2.png" alt="nowlist2"></a></li>
 						<li><a href="https://now3link.com/" title="nowlist3로이동"><img src="images/now-list3.png" alt="nowlist3"></a></li>
 					</ul>
 				</div>
-			</section><!-- wt-now-->
+			</article><!-- wt-now-->
 
-			<section>
+			<article>
 				<h2><a href="https://weatherlink.com/" title="날씨이동">날씨</a><span>서울시 잠실동</span></h2>
 				<button type="button" onclick=""><i></i></button>
 
@@ -271,9 +280,9 @@
 						</ul>
 					</div>
 				</div>
-			</section><!--weater-->
+			</article><!--weater-->
 
-			<section>
+			<article>
 				<div>
 					<a href="https://covidlink.com/" title="코로나19확진현황이동">
 						<h2>
@@ -292,27 +301,27 @@
 						<p>백신 정보 팩트는?</p>
 					</a>
 				</div>
-			</section><!-- covid-->
+			</article><!-- covid-->
 
-			<section>
+			<article>
 				<h2><i></i><span>제102주년</span> 대한민국 임시정부 수립일</h2>
-			</section><!-- anni-->
+			</article><!-- anni-->
 
-			<section>
+			<article>
 				<h2><i></i>앱으로 <span>새로운 네이버</span>를 더 쾌적하게 사용해 보세요.</h2>
 
 				<button type="button" onclick="">앱 사용하기</button>
-			</section><!-- app -->
+			</article><!-- app -->
 
-			<section>
+			<article>
 				<h2><a href="https://webtoonlink.com/" title="웹툰이동">웹툰</a></h2>
 				<button type="button"><i></i></button>
 
 				<div>
 				</div><!-- 숨겨진 웹툰 컨텐츠 -->
-			</section><!-- webtoon-->
+			</article><!-- webtoon-->
 
-			<section>
+			<article>
 				<h2>인기 주제 판을 확인해 보세요!</h2>
 				<a href="https://admlink.com/" title="판관리이동">판관리</button>
 
@@ -346,15 +355,15 @@
 						</a>
 					</li>
 				</ul>
-			</section><!-- pan-->
+			</article><!-- pan-->
 
-			<section>
+			<article>
 				<a href="https://noticelink.com/" title="공지이동">
 					<span>알립니다</span>
 					<h2>네이버앱 업데이트 사전 안내</h2>	
 					<i></i>
 				</a>
-			</section><!-- notice -->
+			</article><!-- notice -->
 		</section><!-- section/main -->
 
 		<footer>
