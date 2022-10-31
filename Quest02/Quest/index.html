@@ -16,10 +16,10 @@
 
 	</head>
 	<body>
+		<!--header-->
 		<header>
 			<!-- TODO: 어디까지를 header로 보는 것이 좋을까요? -->
-
-			<div class="top-header">
+			<div class="header">
 				<div class="menu-bar">
 					<a href="https://asidelink.com/" title="메뉴페이지이동">
 						<span class="bar"></span>
@@ -28,15 +28,21 @@
 					</a>
 				</div>
 				<div class="service-box">
-					<a href="https://qrlink.com/" class="qr-link" title="qr체크인이동">QR 체크인</a>
-					<a herf="https://paylink.com/" class="pay-link" title="네이버페이이동"><img src="images/square-logo.png" alt="네이버페이">Pay</a>
-					<a herf="https://maillink.com/" class="mail-link" title="메일이동"><img src="images/mail2.png" alt="메일"></a>
+					<a href="https://qrlink.com/" class="qr" title="qr체크인이동">QR 체크인</a>
+					<a herf="https://paylink.com/" class="pay" title="네이버페이이동"><img src="images/square-logo.png" alt="네이버페이">Pay</a>
+					<a herf="https://maillink.com/" class="mail" title="메일이동"><img src="images/mail2.png" alt="메일"></a>
 				</div>
-			</div><!--top-head-->
+			</div>
+		</header>
+		<!--header-->
 
-			<div class="bottom-header">
+		<section class="main">
+			<!-- TODO: main은 어떤 식으로 나눌 수 있을까요? -->
+
+			<!--mWrap:logo&search-->
+			<div class="mWrap">
 				<h1 class="logo">
-					<a href="https://m.naver.com/" class="logo-link" title="네이버메인페이지이동">
+					<a href="https://m.naver.com/" class="logo-wrap" title="네이버메인페이지이동">
 						<img src="images/naver-logo.png" alt="네이버 로고">
 					</a>
 				</h1>
@@ -49,12 +55,13 @@
 					</form>
 
 					<div class="search-nav">
-						<button type="button"><img src="images/mic.png" alt="음성인식찾기"></button>
-						<button type="button"><img src="images/photo.png" alt="이미지찾기"></button>
-						<button type="button"><img src="images/map.png" alt="지도찾기"></button>
+						<button type="button" onclick=""><img src="images/mic.png" alt="음성인식찾기"></button>
+						<button type="button" onclick=""><img src="images/photo.png" alt="이미지찾기"></button>
+						<button type="button" onclick=""><img src="images/map.png" alt="지도찾기"></button>
 					</div>
 				</div>
-
+				
+				<!--nav-->
 				<nav>
 					<ul class="menu-list">
 						<li class="menu-item">
@@ -122,12 +129,11 @@
 						</li>
 					</ul>
 				</nav>
-			</div><!--bottom-head-->
-		</header>
+				<!--nav-->
+			</div>
+			<!--mWrap:logo&search-->
 
-		<section class="main">
-			<!-- TODO: main은 어떤 식으로 나눌 수 있을까요? -->
-
+			<!--wt-now-->
 			<article class="wt-now container">
 				<div class="wt">
 					<i class="wt-icon"></i>
@@ -136,11 +142,11 @@
 
 				<div class="now">
 					<div class="now-wrap">
-						<h2 class="sc-title">
-							<a href="https://nowlink.co/m" title="now이동">
+						<a href="https://nowlink.co/m" title="now이동">
+							<h2 class="sc-title">
 								<img src="images/now.png" alt="now">
-							</a>
-						</h2>
+							</h2>
+						</a>
 						<p>지금 방송중</p>
 					</div>
 					<ul class="now-list">
@@ -149,14 +155,18 @@
 						<li class="now-item"><a href="https://now3link.com/" title="nowlist3로이동"><img src="images/now-list3.png" alt="nowlist3"></a></li>
 					</ul>
 				</div>
-			</article><!-- wt-now-->
+			</article>
+			<!--wt-now-->
 
+			<!--weater-->
 			<article class="weather container">
 				<div class="weather-title">
-					<h2 class="sc-title"><a href="https://weatherlink.com/" title="날씨이동">날씨</a></h2>
+					<a href="https://weatherlink.com/" title="날씨이동">
+						<h2 class="sc-title">날씨</h2>
+					</a>
 					<p>서울시 잠실동</p>
 				</div>
-				<button type="button" class="down-button"><i class="down-icon"></i></button>
+				<button type="button" class="down-button" onclick=""><i class="down-icon"></i></button>
 
 				<div class="weather-contents">
 					<ul class="wt-tab">
@@ -165,14 +175,14 @@
 						<li class="wt-tab-list active"><button type="button" onclick="">주간 날씨</button></li>
 						<li class="wt-tab-list"><button type="button" onclick="">주간 미세먼지</button</li>
 					</ul>
-					<div class="wt-graph" id="tab3">
+					<div class="wt-graph">
 						<ul class="wt-graph-wrap">
 							<li class="wt-list">
 								<dl class="graph-content">
 									<dt class="day">어제</dt>
 									<dd class="degree-box">
 										<div class="h-degree">19˚</div>
-										<div class="l-degred">8˚</div>
+										<div class="l-degree">8˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt2.png" alt="맑음"> 
@@ -184,7 +194,7 @@
 									<dt class="day">오늘</dt>
 									<dd class="degree-box">
 										<div class="h-degree">22˚</div>
-										<div class="l-degred">7˚</div>
+										<div class="l-degree">7˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt2.png" alt="맑음"> 
@@ -196,7 +206,7 @@
 									<dt class="day">월</dt>
 									<dd class="degree-box">
 										<div class="h-degree">17˚</div>
-										<div class="l-degred">11˚</div>
+										<div class="l-degree">11˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt3.png" alt="비"> 
@@ -208,7 +218,7 @@
 									<dt class="day">화</dt>
 									<dd class="degree-box">
 										<div class="h-degree">18˚</div>
-										<div class="l-degred">12˚</div>
+										<div class="l-degree">12˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt3.png" alt="비"> 
@@ -220,7 +230,7 @@
 									<dt class="day">수</dt>
 									<dd class="degree-box">
 										<div class="h-degree">17˚</div>
-										<div class="l-degred">4˚</div>
+										<div class="l-degree">4˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt2.png" alt="맑음"> 
@@ -232,7 +242,7 @@
 									<dt class="day">목</dt>
 									<dd class="degree-box">
 										<div class="h-degree">19˚</div>
-										<div class="l-degred">4˚</div>
+										<div class="l-degree">4˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt2.png" alt="맑음"> 
@@ -244,7 +254,7 @@
 									<dt class="day">금</dt>
 									<dd class="degree-box">
 										<div class="h-degree">19˚</div>
-										<div class="l-degred">6˚</div>
+										<div class="l-degree">6˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt2.png" alt="맑음"> 
@@ -256,7 +266,7 @@
 									<dt class="day">토</dt>
 									<dd class="degree-box">
 										<div class="h-degree">19˚</div>
-										<div class="l-degred">8˚</div>
+										<div class="l-degree">8˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt2.png" alt="맑음"> 
@@ -268,7 +278,7 @@
 									<dt class="day">일</dt>
 									<dd class="degree-box">
 										<div class="h-degree">18˚</div>
-										<div class="l-degred">6˚</div>
+										<div class="l-degree">6˚</div>
 									</dd>
 									<dd class="wt-icon-box">
 										<img src="images/wt2.png" alt="맑음"> 
@@ -278,8 +288,10 @@
 						</ul>
 					</div>
 				</div>
-			</article><!--weater-->
-
+			</article>
+			<!--weater-->
+			
+			<!--covid-->
 			<article class="covid container">
 				<div class="covid-wrap">
 					<a href="https://covidlink.com/" title="코로나19확진현황이동">
@@ -299,29 +311,37 @@
 						<p>백신 정보 팩트는?</p>
 					</a>
 				</div>
-			</article><!-- covid-->
+			</article>
+			<!--covid-->
 
+			<!--anni-->
 			<article class="anni container">
-				<h2 class="sc-title2"><i class="anni-icon"></i><span>제102주년</span> 대한민국 임시정부 수립일</h2>
-			</article><!-- anni-->
+				<a href="https://annilink.com" title="대한민국임시정부수립일이동">
+					<h2 class="sc-title2"><i class="anni-icon"></i><span>제102주년</span> 대한민국 임시정부 수립일</h2>
+				</a>
+			</article>
+			<!--anni-->
 
+			<!--app-->
 			<article class="app container">
 				<h2 class="sc-title"><i class="naver-icon"></i>앱으로 <strong>새로운 네이버</strong>를 더 쾌적하게 사용해 보세요.</h2>
+				<button type="button" class="app-button" onclick="">앱 사용하기</button>
+			</article>
+			<!-- app -->
 
-				<button type="button" class="app-button">앱 사용하기</button>
-			</article><!-- app -->
-
+			<!--webtoon-->
 			<article class="webtoon container">
-				<h2 class="sc-title"><a href="https://webtoonlink.com/" title="웹툰이동">웹툰</a></h2>
-				<button type="button" class="down-button"><i class="down-icon"></i></button>
+				<a href="https://webtoonlink.com/" title="웹툰이동">
+					<h2 class="sc-title">웹툰</h2>
+				</a>
+				<button type="button" class="down-button" onclick=""><i class="down-icon"></i></button>
+			</article>
+			<!-- webtoon-->
 
-				<div class="webtoon-contents">
-				</div>
-			</article><!-- webtoon-->
-
+			<!--pan-->
 			<article class="pan container">
 				<h2 class="sc-title">인기 주제 판을 확인해 보세요!</h2>
-				<a href="https://admlink.com/" title="판관리이동" class="adm-link">판관리</button>
+				<a href="https://admlink.com/" title="판관리이동" class="adm-link">판관리</a>
 
 				<ul class="pan-list">
 					<li>
@@ -353,17 +373,21 @@
 						</a>
 					</li>
 				</ul>
-			</article><!-- pan-->
+			</article>
+			<!-- pan-->
 
+			<!--notice-->
 			<article class="notice container">
 				<a href="https://noticelink.com/" title="공지이동">
 					<span class="notice-button">알립니다</span>
 					<strong class="sc-title">네이버앱 업데이트 사전 안내</strong>	
 					<i class="go-icon"></i>
 				</a>
-			</article><!-- notice -->
+			</article>
+			<!-- notice -->
 		</section><!-- section/main -->
 
+		<!--footer-->
 		<footer>
 			<!-- TODO: 하단의 여러 가지 링크들은 어떻게 처리하면 좋을까요? -->
 			<ul class="f-nav">
@@ -381,6 +405,7 @@
 					<img src="images/f-logo.png" alt="네이버 로고">
 				</a>
 			</div>
-		</footer><!-- footer -->
+		</footer>
+		<!-- footer -->
 	</body>
 </html>
