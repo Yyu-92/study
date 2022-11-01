@@ -134,8 +134,8 @@ figure{margin:0;}
 .pan-icon.icon2{background:url(images/pan2.png)no-repeat center center;}
 .pan-icon.icon3{background:url(images/pan3.png)no-repeat center center;}
 .pan-icon.icon4{background:url(images/pan4.png)no-repeat center center;}
-.go-icon{position:absolute;right:18px;top:50%;transform:translateY(-50%);width:7px;height:12px;background-size:cover;display:block;background:url(images/go-icon.png)no-repeat center center;transition:all 0.4s;}
-.pan-list li a:hover .go-icon{right:10px;}
+.go-icon{/*position:absolute;right:18px;top:50%;transform:translateY(-50%);*/margin-left:auto;width:7px;height:12px;background-size:cover;display:block;background:url(images/go-icon.png)no-repeat center center;transition:all 0.4s;}
+.pan-list li a:hover .go-icon{margin-right:-6px;}
 
 .notice a{display:flex;align-items:center;position:relative;}
 .notice .sc-title{color:#494b51;}
