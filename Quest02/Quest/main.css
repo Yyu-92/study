@@ -14,8 +14,10 @@ figure{margin:0;}
 
 /*header*/
 .header{padding:15px 2% 120px 2%;display:flex;justify-content:space-between;align-items:center;box-sizing:border-box;}
+/*menu-bar*/
 .menu-bar .bar{width:24px;height:2px;background:#555;margin:6px;display:block;}
 
+/*qr, pay, mail*/
 .service-box{display:flex;align-items:center;}
 .service-box a{display:flex;align-items:center;justify-content:center;margin:0 4px;color:#4b5154;font-weight:bold;}
 .qr{font-size:14px;position:relative;}
