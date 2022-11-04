@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 초보 프로그래머의 영원한 친구, 별찍기 프로그램~**
+
+        var num = prompt("숫자를 입력하세요.");
+        var star = '';
+        var blank = '';
+        var pyramid = '';
+        
+        /*방법1 - 공백과 별 구분*/
+        for (var i = 1; i <= num; i++){
+            blank='';
+            star='';
+
+            for (var j = 1; j <= num - i; j++){
+                blank += ' ';
+            }
+            for (var k = 1; k <= 2*i-1; k++){
+                star += '*';
+            }
+
+           pyramid = pyramid + blank + star + '\n';     
+        }
+        console.log(pyramid);
+        
+        /*방법2 - 공백과 별 구분x*/
+        var star2 = '';
+
+        for (var i = 1; i <= num; i++){
+            for (var j = 1; j <= num - i; j++){
+                star2 += ' ';
+            }
+            for (var k = 1; k <= 2*i-1; k++){
+                star2 += '*';
+            }
+
+           star2 += '\n';     
+        }
+        console.log(star2);
+    
+    </script>
+</body>
+</html>
