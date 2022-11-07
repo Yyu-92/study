@@ -36,6 +36,7 @@
 		<script>
 
 			/*문제1 - 박스를 클릭했을 때 해당 박스의 배경색 토글시키기*/
+			/*방법1*/
 			/*1.각 square들을 배열로 만들기
 			2. this를 사용하여 클릭한 sqaure에 스타일변화시키는 이벤트를 부여하는 함수
 			3. foreach문으로 각 요소에 대해 실행해주기*/
@@ -60,6 +61,21 @@
 			};
 
 			sqaureArr.forEach(styleToggle); // foreach문 : 배열에 활용이 가능한 메서드로, 매개변수에 주어진 함수를 배열 각 요소에 실행시켜준다.
+			
+			/*방법2*/
+			/*1.square의 배경색을 바꿔주는 함수를 따로 만들기
+			2. if대신 삼항연산자를 이용하여 square클릭시 이벤트를 부여*/
+			// function bgChange(box, bgColor){
+			// 	box.style.backgroundColor = bgColor;
+			// }
+			// function styleToggle2(box){
+			// 	box.addEventListener('click', function(){
+			// 		this.style.backgroundColor == 'yellow'? bgChange(this, 'white') : bgChange(this, 'yellow');
+			// 	})	
+			// };
+
+			// sqaureArr.forEach(styleToggle2);
+
 			
 			/*박스를 클릭했을 때 해당 박스에 class명이 토글되기*/
 			/*1. 각 square들을 배열로 만들기
