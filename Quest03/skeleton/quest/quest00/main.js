@@ -20,7 +20,7 @@ var imgText = {
 // const newImage = document.createElement('img');
 // newImage.setAttribute('src', xxx);
 // newImage.setAttribute('alt', xxx);
- //thumbBar.appendChild(newImage);
+// thumbBar.appendChild(newImage);
 
  /*img요소를 생성하여
 썸네일 이미지들을 한번씩 돌면서 경로와 alt값을 넣어주고
@@ -36,6 +36,8 @@ for(var i = 0; i < imgArr.length; i++){
     })
 }
 
+/* Wiring up the Darken/Lighten button */
+
 /*btn클릭 시 btn 안의 글자가 Darken이면 어둡게, 아니라면 밝게 하는 함수 */
 btn.addEventListener('click', function(){
     if(btn.innerHTML == 'Darken'){
@@ -47,14 +49,14 @@ btn.addEventListener('click', function(){
 
 function textLight(){
     btn.innerHTML = 'Lighten';
-    overlay.style.backgroundColor = 'rgba(0,0,0,0)'
+    overlay.style.backgroundColor = 'rgba(0,0,0,0.6)'
 }
 
 function textDark(){
     btn.innerHTML = 'Darken';
-    overlay.style.backgroundColor = 'rgba(0,0,0,0.6)'
+    overlay.style.backgroundColor = 'rgba(0,0,0,0)'
 }
 
 
 
-/* Wiring up the Darken/Lighten button */
+
