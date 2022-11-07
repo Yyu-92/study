@@ -5,25 +5,27 @@
 * ES(ECMAScript)는 자바스크립트를 표준화하기 위해 만들어진 ECMA-262기술 규격에 따라 정의하고 있는 자바스크립트 표준 사양이다.
 <table>
     <tr><th>버전</th><th>특징</th></tr>
-    <tr><td colspan="2">ES1(1997)</td></tr>
-    <tr><td colspan="2">ES2(1998)</td></tr>
-    <tr><td colspan="2">ES3(1999)</td></tr>
+    <tr><td>ES1(1997)</td><td>-</td></tr>
+    <tr><td>ES2(1998)</td><td>-</td></tr>
+    <tr><td>ES3(1999)</td><td>-</td></tr>
     <tr><td>ES4</td><td>언어에 얽힌 정치적, 견해의 차이로 버려졌다.</td></tr>
     <tr>
         <td><b>ES3(1999)<b></td>
-        <td>- 우리가 흔히 말하는 자바스크립트<br>
+        <td>- 우리가 흔히 말하는 자바스크립트</br>
             - 함수 단위의 스코프, 호이스팅, 프로토타입, 모듈화 미지원, 클로저 등등 자바스크립트의 기본적인 특징들이 정의되었다.</br>
-            - 대부분의 브라우저에서 지원하고, IE8까지 지원된다.
-            - <b>add try/catch, switch, do-while</b>
+            - 대부분의 브라우저에서 지원하고, IE8까지 지원된다.</br>
+            - add <b>try/catch, switch, do-while</b>
         </td>
     </tr>
     <tr>
         <td><b>ES5(2009)</b></td>
         <td>- IE9부터 본격적으로 지원하지만 es5-shim을 사용하면 하위 버전에서도 특정 기능들을 지원해준다.</br>
-            - strict 모드 지원 (ex)선언되지 않은 변수를 사용할 수 없음)</br>
+            - strict 모드 지원 : ex)선언되지 않은 변수를 사용할 수 없음</br>
             - object 대한 속성 <b>getters and setters</b></br>
-            ![screenshot](./images/getset.png)</br>
-            - JSON 지원 <b>JSON.parse()(텍스트를 javascript객체로 변환하는 데 사용), JSON.stringify()(문자열로 변환하는데 사용)</b></br>
+            <img src="images/getset.png" alt="gettersetter" >
+            - JSON 지원</br> 
+            <b>JSON.parse() : 텍스트를 javascript객체로 변환하는 데 사용</b></br>
+            <b>JSON.stringify() : 문자열로 변환하는데 사용</b></br>
             - add <b>Function bind()</b>(bind()메소드를 사용하면 다를 객체의 메소드를 빌릴 수 있다.)</br>
             - add <b>String.trim(), Array.isArray(), Array forEach(), Array map(), Array filter(), Array reduce(), Array reduceRight(), Array every(), Array some(), Array indexOf(), 
     Array lastIndexOf(), Date.now(), Date toISOString(), Date toJSON()</b></br>
