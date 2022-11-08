@@ -71,7 +71,7 @@
         - Trailing commas : 객체뿐 아니라 함수에서도 인자의 마지막에 콤마를 붙일 수 있음</br>
         - Async & await : 비동기처리시 특정 코드의 연산이 끝날 때까지 기다리게 해줌</br>
         </br>
-        <img scr="images/async.png" alt="async&await">
+        <img scr="images/async.png" alt="asyncawait">
         </br>
         이 때, 비동기 처리 메소드가 반드시 프로미스 객체를 반환해야 await가 의도한 대로 동작한다.
         </td>
@@ -83,10 +83,10 @@
         - Promise finally : promise에 finally가 추가. 성공, 실패의 여부와 상관없이 무조건 실행되는 메소드</br>
         - Async iteration : async문법을 for...of문에서 사용이 가능하게 되어 반복적인 비동기 작업을 쉽게 처리할 수 있게 됨</br>
         - 정규표현식의 강화</br>
-        &nbsp;&nbsp;lookbehind가 생김 : 특정 문자열 뒤의 문자열을 찾는 기능</br>
-        &nbsp;&nbsp;유니코드를 위한 u 플래그가 추가되어 특정 유니코드를 정규표현식으로 표현 가능</br>
-        &nbsp;&nbsp;캡쳐링 그룹에 이름을 붙일 수 있음 : 캡쳐링 그룹이란 정규표현식에서 괄호로 묶어준 것들로 groups속성으로 접근할 수 있음</br>
-        &nbsp;&nbsp;s(dotAll) 플래그 : .표현식은 개행문자를 제외했으나, s 플래그를 달면 개행식도 포함됨
+        &nbsp;&nbsp;&nbsp;&nbsp;lookbehind가 생김 : 특정 문자열 뒤의 문자열을 찾는 기능</br>
+        &nbsp;&nbsp;&nbsp;&nbsp;유니코드를 위한 u 플래그가 추가되어 특정 유니코드를 정규표현식으로 표현 가능</br>
+        &nbsp;&nbsp;&nbsp;&nbsp;캡쳐링 그룹에 이름을 붙일 수 있음 : 캡쳐링 그룹이란 정규표현식에서 괄호로 묶어준 것들로 groups속성으로 접근할 수 있음</br>
+        &nbsp;&nbsp;&nbsp;&nbsp;s(dotAll) 플래그 : .표현식은 개행문자를 제외했으나, s 플래그를 달면 개행식도 포함됨
         </td>
     </tr>
 </table>
@@ -198,8 +198,7 @@
 3-1. += 연산자를 사용하여 추가하기    
 `ex) document.getElementById('a').className += ' 클래스명'`
 
-☆ 추가</br>
-DOM 객체를 이용한 CSS스타일 변경
+☆ 추가 [DOM 객체를 이용한 CSS스타일 변경]
 1. DOM 객체를 특정하고 style.property를 이용하여 CSS를 변경한다. 
 `ex) document.getElementById('a').style.속성 = '새 스타일'` 
     * property에는 backgroundColor, color, position, width 값 등이 있다.  
@@ -212,7 +211,9 @@ DOM 객체를 이용한 CSS스타일 변경
 * IE9 이하에서는 classList 속성을 지원하고 있지 않기 때문에, 
     1. IE9 이하 버전용 크로스브라우징 소스를 추가하거나,</br>  
     </br>
-    ![screenshot](./images/pollyfill.png)
+
+    ![screenshot](images/pollyfill.png)
+    
     </br>
     2. DOM 객체를 특정하고 setAttribute() 메소드를 이용하여 class 속성을 생성해준 후 클래스명을 추가, 삭제한다.</br>  
     3. DOM 객체를 특정하고 className을 이용하여 클래스명 추가, 삭제한다.</br>
@@ -245,8 +246,7 @@ DOM 객체를 이용한 CSS스타일 변경
 <table>
     <tr><th>구분</th><th>var</th><th>let</th></tr>
     <tr><th>스코프</th><td>가장 가까운 function 내부</td><td>가장 가까운 중괄호 내부</td></tr>
-    <tr><td colspan="3"> - var는 자신으로부터 가장 가까운 function 스코프 안에서만 사용할 수 있다. </br>
-    함수의 중괄호를 벗어나면 더 이상 그 변수를 사용할 수 없는 것이다.</br>
+    <tr><td colspan="3"> - var는 자신으로부터 가장 가까운 function 스코프 안에서만 사용할 수 있다. 함수의 중괄호를 벗어나면 더 이상 그 변수를 사용할 수 없는 것이다.</br>
     같은 function이기만 하면 되어 if나 for안에서 선언된 변수를 밖에서 사용하는 것도 가능하다. </br>
     - let은 자신으로부터 가장 가까운 블록 스코프 안에서만 사용할 수 있다.</br>
     for 초기식에서 let으로 선언한 변수는 for 스코프에 속하므로 for 바깥에서 사용할 수 없다. </td></tr>
@@ -255,7 +255,7 @@ DOM 객체를 이용한 CSS스타일 변경
 * 호이스팅(hoisting) = 모든 변수, 함수의 선언부를 맨 위로 끌어올리는 것이다. 변수 선언보다 변수 호출이 윗 줄에 위치해도 실행되는 기능
 <table>
     <tr><th>구분</th><th>var</th><th>let</th></tr>
-    <tr><th>호이스팅</th><td><td>호이스팅 됨</td><td>호이스팅되지 않음</td></tr>
+    <tr><th>호이스팅</th><td>호이스팅 됨</td><td>호이스팅되지 않음</td></tr>
     <tr><td colspan="3"> - var는 호이스팅이 일어나 var 선언 이전에도 스코프 안이라면 var로 선언된 변수를 사용할 수 있다.</br> 
     주의할 점은 <b>호이스팅으로 인해 값까지 초기화가 이루어지는 것은 아니기 때문에</b></br> 
     예를 들어</br>
@@ -275,13 +275,17 @@ DOM 객체를 이용한 CSS스타일 변경
 ## 자바스크립트의 익명 함수는 무엇인가요?
 * 자바스크립트 익명 함수란 따로 함수의 이름을 갖지 않는 함수이다. 재사용하지 않고, 한 번만 사용할 함수를 위한 개념이다.
 </br>
-![screenshot](./images/anonymous.png)
+
+![screenshot](images/anonymous.png)
+
 </br>
 
 * 함수명 대신 변수명에 함수 코드를 저장하여 사용할 수 있는데, 변수명을 사용해서 함수를 호출하거나 변수값을 이동시킬 수 있다.
 * 기본형은 끝에 ';'(세미콜론)을 붙여주어야 한다.
 </br>
-![screenshot](./images/anonymous2.png)
+
+![screenshot](images/anonymous2.png)
+
 </br>
 
 * 특징 
@@ -294,14 +298,18 @@ DOM 객체를 이용한 CSS스타일 변경
 ### 자바스크립트의 Arrow function은 무엇일까요?
 * 자바스크립트의 화살표함수란 화살표(=>)를 사용하여 일반 함수 표현식보다 단순하고 간결한 문법으로 함수를 만드는 방식이다.
 </br>
-![screenshot](./images/arrow.png)
+
+![screenshot](images/arrow.png)
+
 </br>
 
 * 특징
     * 화살표 함수는 익명 함수로만 사용할 수 있다.
     * 콜백 함수(다른 함수의 인자로써 이용되는 함수)로 사용할 수 있다. 
     </br>
-    ![screenshot](./images/callback.png)
+
+    ![screenshot](images/callback.png)
+    
     </br>
     * this와 argument가 없다 ==> 화살표 함수의 `this`는 함수를 선언할 때 this에 바인딩할 객체가 정적으로 결정되므로, 언제나 상위 스코프의 this를 가리킨다. 
 * 화살표 함수를 쓰지 않아야 할 때
