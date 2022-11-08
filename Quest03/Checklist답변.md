@@ -71,7 +71,7 @@
         - Trailing commas : 객체뿐 아니라 함수에서도 인자의 마지막에 콤마를 붙일 수 있음</br>
         - Async & await : 비동기처리시 특정 코드의 연산이 끝날 때까지 기다리게 해줌</br>
         </br>
-        <img scr="images/async.png" alt="asyncawait">
+        <img src="images/async.png" alt="asyncawait"></br>
         </br>
         이 때, 비동기 처리 메소드가 반드시 프로미스 객체를 반환해야 await가 의도한 대로 동작한다.
         </td>
@@ -186,8 +186,8 @@
     <tr><td><b>.classList.replace('기존 클래스명', '새 클래스명')</b></td><td>특정 클래스 값을 다른 클래스 값으로 교체한다.</td></tr>
 </table>
 
-&nbsp;&nbsp;&nbsp;&nbsp;`ex) document.getElementById('a').classList.add('클래스명');`  
-&nbsp;&nbsp;&nbsp;&nbsp;`ex) document.getElementById('a').classList.remove('클래스명');`
+&nbsp;&nbsp; `ex) document.getElementById('a').classList.add('클래스명');`  
+&nbsp;&nbsp; `ex) document.getElementById('a').classList.remove('클래스명');`
 
 2. DOM 객체를 특정하고 setAttribute() 메소드를 이용하여 class 속성을 생성해준 후 클래스명을 추가, 삭제한다.    
 `ex) document.getElementById('a').setAttribute('class', '클래스명');`  
@@ -211,7 +211,7 @@
 * IE9 이하에서는 classList 속성을 지원하고 있지 않기 때문에, 
     1. IE9 이하 버전용 크로스브라우징 소스를 추가하거나,</br>  
     </br>
-
+    ex)
     ![screenshot](images/pollyfill.png)
     
     </br>
@@ -246,7 +246,7 @@
 <table>
     <tr><th>구분</th><th>var</th><th>let</th></tr>
     <tr><th>스코프</th><td>가장 가까운 function 내부</td><td>가장 가까운 중괄호 내부</td></tr>
-    <tr><td colspan="3"> - var는 자신으로부터 가장 가까운 function 스코프 안에서만 사용할 수 있다. 함수의 중괄호를 벗어나면 더 이상 그 변수를 사용할 수 없는 것이다.</br>
+    <tr><td colspan="3"> - var는 자신으로부터 가장 가까운 function 스코프 안에서만 사용할 수 있다. 함수의 중괄호를 벗어나면 더 이상 그 변수를 사용할 수 없는 것이다.
     같은 function이기만 하면 되어 if나 for안에서 선언된 변수를 밖에서 사용하는 것도 가능하다. </br>
     - let은 자신으로부터 가장 가까운 블록 스코프 안에서만 사용할 수 있다.</br>
     for 초기식에서 let으로 선언한 변수는 for 스코프에 속하므로 for 바깥에서 사용할 수 없다. </td></tr>
@@ -256,7 +256,7 @@
 <table>
     <tr><th>구분</th><th>var</th><th>let</th></tr>
     <tr><th>호이스팅</th><td>호이스팅 됨</td><td>호이스팅되지 않음</td></tr>
-    <tr><td colspan="3"> - var는 호이스팅이 일어나 var 선언 이전에도 스코프 안이라면 var로 선언된 변수를 사용할 수 있다.</br> 
+    <tr><td colspan="3"> - var는 호이스팅이 일어나 var 선언 이전에도 스코프 안이라면 var로 선언된 변수를 사용할 수 있다.
     주의할 점은 <b>호이스팅으로 인해 값까지 초기화가 이루어지는 것은 아니기 때문에</b></br> 
     예를 들어</br>
     </br>
