@@ -65,14 +65,14 @@
 			/*방법2*/
 			/*1.square의 배경색을 바꿔주는 함수를 따로 만들기
 			2. if대신 삼항연산자를 이용하여 square클릭시 이벤트를 부여*/
-			// function bgChange(box, bgColor){
-			// 	box.style.backgroundColor = bgColor;
-			// }
-			// function styleToggle2(box){
-			// 	box.addEventListener('click', function(){
-			// 		this.style.backgroundColor == 'yellow'? bgChange(this, 'white') : bgChange(this, 'yellow');
-			// 	})	
-			// };
+			function bgChange(box, bgColor){
+				box.style.backgroundColor = bgColor;
+			}
+			function styleToggle2(box){
+				box.addEventListener('click', function(){
+					this.style.backgroundColor == 'yellow'? bgChange(this, 'white') : bgChange(this, 'yellow');
+				})	
+			};
 
 			// sqaureArr.forEach(styleToggle2);
 
