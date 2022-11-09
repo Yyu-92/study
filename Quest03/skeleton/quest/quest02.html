@@ -35,68 +35,68 @@
 
 		<script>
 
-			/*문제1 - 박스를 클릭했을 때 해당 박스의 배경색 토글시키기*/
-			/*방법1*/
-			/*1.각 square들을 배열로 만들기
+			/**문제1 - 박스를 클릭했을 때 해당 박스의 배경색 토글시키기**/
+			/**방법1**/
+			/**1.각 square들을 배열로 만들기
 			2. this를 사용하여 클릭한 sqaure에 스타일변화시키는 이벤트를 부여하는 함수
-			3. foreach문으로 각 요소에 대해 실행해주기*/
+			3. foreach문으로 각 요소에 대해 실행해주기**/
 
 			var row = document.getElementsByClassName('row1')[0];
 			var sqaure = row.getElementsByClassName('square');
 			
-			/*for문을 이용해 square배열 생성*/
-			var sqaureArr = [];
+			/**for문을 이용해 square배열 생성**/
+			var squareArr = [];
 			for (var i = 0; i < sqaure.length; i++){
-				sqaureArr.push(sqaure[i]);
+				squareArr.push(sqaure[i]);
 			};
 			
 			function styleToggle(box){
 				box.addEventListener('click', function(){
-					if(this.style.backgroundColor != 'yellow'){ // this : 이벤트핸들러에서 this는 이벤트를 받는 HTML요소를 가리킨다.
+					if(this.style.backgroundColor !== 'yellow'){ // this : 이벤트핸들러에서 this는 이벤트를 받는 HTML요소를 가리킨다.
 						this.style.backgroundColor = 'yellow';
 					}else{
 						this.style.backgroundColor = 'white';
 					};
-				})	
+				});	
 			};
 
-			sqaureArr.forEach(styleToggle); // foreach문 : 배열에 활용이 가능한 메서드로, 매개변수에 주어진 함수를 배열 각 요소에 실행시켜준다.
+			squareArr.forEach(styleToggle); // foreach문 : 배열에 활용이 가능한 메서드로, 매개변수에 주어진 함수를 배열 각 요소에 실행시켜준다.
 			
-			/*방법2*/
-			/*1.square의 배경색을 바꿔주는 함수를 따로 만들기
-			2. if대신 삼항연산자를 이용하여 square클릭시 이벤트를 부여*/
-			function bgChange(box, bgColor){
-				box.style.backgroundColor = bgColor;
-			}
-			function styleToggle2(box){
-				box.addEventListener('click', function(){
-					this.style.backgroundColor == 'yellow'? bgChange(this, 'white') : bgChange(this, 'yellow');
-				})	
-			};
+			/**방법2**/
+			/**1.square의 배경색을 바꿔주는 함수를 따로 만들기
+			2. if대신 삼항연산자를 이용하여 square클릭시 이벤트를 부여**/
+			// function bgChange(box, bgColor){
+			// 	box.style.backgroundColor = bgColor;
+			// }
+			// function styleToggle2(box){
+			// 	box.addEventListener('click', function(){
+			// 		this.style.backgroundColor == 'yellow'? bgChange(this, 'white') : bgChange(this, 'yellow');
+			// 	})	
+			// };
 
-			// sqaureArr.forEach(styleToggle2);
+			// squareArr.forEach(styleToggle2);
 
 			
-			/*박스를 클릭했을 때 해당 박스에 class명이 토글되기*/
-			/*1. 각 square들을 배열로 만들기
+			/**박스를 클릭했을 때 해당 박스에 class명이 토글되기**/
+			/**1. 각 square들을 배열로 만들기
 			2. this를 사용하여 클릭한 square에 class명을 토글시키는 이벤트를 부여하는 함수
-			3. foreach문으로 각 요소에 대해 실행해주기*/
+			3. foreach문으로 각 요소에 대해 실행해주기**/
 			
 			var row2 = document.getElementsByClassName('row2')[0];
 			var sqaure2 = row2.getElementsByClassName('square');
 			
-			var sqaureArr2 = [];
+			var squareArr2 = [];
 			for (var i = 0; i < sqaure2.length; i++){
-				sqaureArr2.push(sqaure2[i]);
+				squareArr2.push(sqaure2[i]);
 			};
 
 			function classToggle(box){
 				box.addEventListener('click', function(){
 					this.classList.toggle('enabled');
-				})	
+				});	
 			};
 
-			sqaureArr2.forEach(classToggle);
+			squareArr2.forEach(classToggle);
 
 		</script>
 	</body>
