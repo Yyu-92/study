@@ -12,19 +12,19 @@
 
         var num = prompt("숫자를 입력하세요.");
 
-        /*방법1 - 공백과 별 구분**/
+        /** 방법1 - 공백과 별 구분 */
         // var star = '';
         // var blank = '';
         // var pyramid = '';
         
-        // for (var i = 1; i <= num; i++){
+        // for (var i = 1; i <= num; i++){ // 층
         //     blank='';
         //     star='';
 
-        //     for (var j = 1; j <= num - i; j++){
+        //     for (var j = 1; j <= num - i; j++){ // 공백
         //         blank += ' ';
         //     }
-        //     for (var k = 1; k <= 2*i-1; k++){
+        //     for (var k = 1; k <= 2*i-1; k++){ //별6
         //         star += '*';
         //     }
 
@@ -32,14 +32,14 @@
         // }
         // console.log(pyramid);
         
-        /**방법2 - 공백과 별 구분x**/
+        /** 방법2 - 공백과 별 구분x */
         var star2 = '';
 
-        for (var i = 1; i <= num; i++){ // 층
-            for (var j = 1; j <= num - i; j++){ // 공백
+        for (var i = 1; i <= num; i++){ 
+            for (var j = 1; j <= num - i; j++){ 
                 star2 += ' ';
             };
-            for (var k = 1; k <= 2*i-1; k++){ //별6
+            for (var k = 1; k <= 2*i-1; k++){ 
                 
                 star2 += '*';
             };
