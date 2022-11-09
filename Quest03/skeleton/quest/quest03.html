@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>구구단 게임</title>
+
+    <style>
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>구구단 게임</h1>
+
+    <li style="margin-bottom:5px;">랜덤값으로 지정할 수 있는 최대 자릿수는 3입니다.</li>
+    <li style="margin-bottom:5px;">자릿수를 등록하면 해당 자릿수 크기의 숫자 2개가 랜덤으로 표시 됩니다.</li>
+    <li style="margin-bottom:5px;">랜덤으로 표시되는 2개 숫자의 곱셈값을 기록하세요.</li>
+    <div class="setDigitForm">
+      <label for="setDigitNum">자릿수를 설정해주세요: </label>
+      <input type="text" id="setDigitNum" class="setDigitNum">
+      <input type="submit" value="등록" class="setDigitSubmit">
+    </div>
+	
+    <div class="form" style="margin-top:40px;">
+      <span id="randA">랜덤값A</span> X <span id="randB">랜덤값B</span> =  <input type="text" id="guessField" class="guessField">
+      <input type="submit" value="정답확인" class="guessSubmit">
+    </div>
+
+    <div class="resultArea" style="margin-top:40px;">
+      <span>정답여부는 여기에!!</span>
+    </div>
+
+    <script>
+      /** TODO: 여기에 게임이 작동될 수 있도록 스크립트를 짜보세요 **/
+
+      /**
+      1-3자릿수 랜덤값뽑기
+      숫자를 입력하고 등록을 누르면 해당 숫자만큼의 자릿수를 가진 2개의 숫자가 랜덤으로 추출
+     추출된 2개의 랜덤숫자가 각각 랜덤값A,B에 표시
+      정답을 입력하고 정답확인을 누르면 정답여부가 표시
+     **/
+
+      var ranNum1 = 0;
+      var ranNum2 = 0;
+      var max = 0;
+      var min = 0;
+    
+      /**랜덤값 뽑기**/
+      document.getElementsByClassName('setDigitSubmit')[0].addEventListener('click', function(){
+        var inputNum = document.getElementById('setDigitNum').value;
+
+        /**Math.floor((Math.random()*(max-min))+min) ==> 자릿수에 따라 max와 min을 변경하여 자릿수에 맞는 랜덤값 추출
+        Math.floor() ==> 소수점 이하를 버림**/
+        if(inputNum == 1){
+          max = 10;
+          min = 1;
+        }else if(inputNum == 2){
+          max = 100;
+          min = 10;
+        }else if(inputNum == 3){
+          max = 1000;
+          min = 100;
+        }else{
+          alert("3자릿수 이하로 입력해주세요~!");
+        }
+        
+        ranNum1 = Math.floor((Math.random()*(max-min))+min);
+        ranNum2 = Math.floor((Math.random()*(max-min))+min);
+
+        /**추출된 랜덤값이 화면에 출력**/
+        document.getElementById('randA').innerText = ranNum1;
+        document.getElementById('randB').innerText = ranNum2;
+
+        document.getElementById('guessField').placeholder = '정답을 입력해주세요.'
+      });
+
+      /**정답확인하기**/
+      /**정답영역 span 선택해서 id 속성 부여하기*/
+      var span = document.getElementsByClassName('resultArea')[0].childNodes; // nodelist
+      span[1].setAttribute('id', 'resultNum');
+      
+      /**정답을 입력하고 '정답확인'을 누르면 정답여부가 표시**/
+      document.getElementsByClassName('guessSubmit')[0].addEventListener('click', function(){
+        var resNum = document.getElementById('guessField').value;
+
+        if(ranNum1 * ranNum2 == resNum){
+          document.getElementById('resultNum').innerText = resNum + "은 정답입니다~!";
+          disabled();
+          
+        }else{
+          document.getElementById('resultNum').innerText = resNum + "은 정답이 아닙니다~!";
+        }
+      });
+
+      /**버튼 비활성화 함수**/
+      function disabled(){
+        document.getElementsByClassName('guessSubmit')[0].disabled = true;
+      }
+
+    </script>
+  </body>
+</html>
