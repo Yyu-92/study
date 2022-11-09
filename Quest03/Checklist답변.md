@@ -20,8 +20,11 @@
     <tr>
         <td><b>ES5(2009)</b></td>
         <td>- IE9부터 본격적으로 지원하지만 es5-shim을 사용하면 하위 버전에서도 특정 기능들을 지원해준다.</br>
-            - strict 모드 지원 : ex)선언되지 않은 변수를 사용할 수 없음</br>
+            - strict 모드 지원 : strict 모드는 자바스크립트가 묵인했던 에러들의 에러 메시지를 발생시킨다. ex)선언되지 않은 변수를 사용할 수 없음</br>
             - object 대한 속성 <b>getters and setters</b></br>
+            객체의 프로퍼티 중 접근자 프로퍼티이다. 접근자 프로퍼티의 본질은 함수인데, 이 함수는 값을 획득(get)하고 설정(set)하는 역할을 담당한다.</br>
+            getter : 프로퍼티를 읽는다.</br>
+            setter : 프로퍼티에 값을 할당하려 할 때 실행한다.</br>
             </br> 
             <img src="images/getset.png" alt="gettersetter" ></br>
             </br> 
@@ -39,8 +42,9 @@
         <td><b>ES6(2015)</b></td>
         <td>- <b>let, const</b> 키워드</b> 추가 : block scope를 가짐</br>
         - <b>arrow 문법</b> 추가 : 간결해진 함수 작정 가능</br>
-        - add iterator, generator : .values() 메소드를 사용하여 이터레이터를 생성하고 이터레이터가 가지고 있는 next() 메소드를 이용하여 다음 값으로 넘어갈 수 있다.</br>
-         제너레이터는 이터레이터를 사용해 실행을 제어하는 함수이다. 제너레이터 함수를 이용하면 함수를 일시정지하거나 다시 시작하거나 하는 등 실행을 제어할 수 있다. function* 함수명(){})</br>
+        - add iterator, generator</br>
+         iterator : next 메소드를 가진 객체로 순차적으로 원소들을 탐색하여 next 메소드를 호출 시마다 새로운 객체를 반환한다. 반환되는 객체는 value와 done 프로퍼티를 가지고 있으며, 탐색이 완료될 때 done값이 true가 된다.</br>
+         generator : 일시정지와 재시작 기능을 여러 반환 포인트들을 통해 사용할 수 있으며, 이러한 반환 포인트들은 yield 키워드를 통해 구현할 수 있다. next 호출 시마다 다음 yield의 expression이 반환된다.</br>
         - module import, export</br>
         - add <b>for..of</b> : 반복 가능한 데이터 구조를 반복할 수 있음</br>
         - promise 도입 : 비동기함수를 실행하고 성공했을때는 resolve(), 실패했을 때는 reject()를 실행</br>
