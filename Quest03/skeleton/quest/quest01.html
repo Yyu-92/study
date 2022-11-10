@@ -10,7 +10,7 @@
     <script>
         // 초보 프로그래머의 영원한 친구, 별찍기 프로그램~**
 
-        var num = prompt("숫자를 입력하세요.");
+        var num = Number(prompt("숫자를 입력하세요."));
 
         /** 방법1 - 공백과 별 구분 */
         // var star = '';
@@ -38,14 +38,14 @@
         for (var i = 1; i <= num; i++){ 
             for (var j = 1; j <= num - i; j++){ 
                 star2 += ' ';
-            };
+            }
             for (var k = 1; k <= 2*i-1; k++){ 
                 
                 star2 += '*';
-            };
+            }
 
            star2 += '\n';     
-        };
+        }
         console.log(star2);
     
     </script>

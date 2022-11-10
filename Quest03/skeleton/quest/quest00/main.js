@@ -8,7 +8,7 @@ var overlay = document.getElementsByClassName('overlay')[0];
 var imgArr = [];
 for(var i = 0; i < 5; i++){
     imgArr.push('pic' + (i + 1) + '.jpg');
-};
+}
 
 /** Declaring the alternative text for each image file */
 var imgText = ['big eye','desert','flower','mural','butterfly'];
@@ -31,7 +31,7 @@ for(var i = 0; i < imgArr.length; i++){
 
     /** displayedImage의 src속성을 바꿔주기 위한 foreach문에 필요한 newImage 배열 생성 */
     newImageArr.push(newImage);   
-};
+}
 
 /** src변경 함수 */
 function displayed(imgItem){
@@ -39,7 +39,7 @@ function displayed(imgItem){
         displayedImage.setAttribute('src', this.getAttribute('src'));
         displayedImage.setAttribute('alt', this.getAttribute('alt'));
     });
-};
+}
 
 newImageArr.forEach(displayed);
 
@@ -51,18 +51,18 @@ darkBtn.addEventListener('click', function(){
         textLight();
     }else{
         textDark();
-    };
+    }
 });
 
 function textLight(){
     darkBtn.innerHTML = 'Lighten';
     overlay.style.backgroundColor = 'rgba(0,0,0,0.6)';
-};
+}
 
 function textDark(){
     darkBtn.innerHTML = 'Darken';
     overlay.style.backgroundColor = 'rgba(0,0,0,0)';
-};
+}
 
 
 

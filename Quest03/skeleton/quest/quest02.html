@@ -50,7 +50,7 @@
 			var squareArr = [];
 			for (var i = 0; i < sqaure.length; i++){
 				squareArr.push(sqaure[i]);
-			};
+			}
 			
 			function styleToggle(box){
 				box.addEventListener('click', function(){
@@ -58,9 +58,9 @@
 						this.style.backgroundColor = 'yellow';
 					}else{
 						this.style.backgroundColor = 'white';
-					};
+					}
 				});	
-			};
+			}
 
 			squareArr.forEach(styleToggle); // foreach문 : 배열에 활용이 가능한 메서드로, 매개변수에 주어진 함수를 배열 각 요소에 실행시켜준다.
 			
@@ -77,7 +77,7 @@
 			// 	box.addEventListener('click', function(){
 			// 		this.style.backgroundColor == 'yellow'? bgChange(this, 'white') : bgChange(this, 'yellow');
 			// 	})	
-			// };
+			// }
 
 			// squareArr.forEach(styleToggle2);
 
@@ -95,13 +95,13 @@
 			var squareArr2 = [];
 			for (var i = 0; i < sqaure2.length; i++){
 				squareArr2.push(sqaure2[i]);
-			};
+			}
 
 			function classToggle(box){
 				box.addEventListener('click', function(){
 					this.classList.toggle('enabled');
 				});	
-			};
+			}
 
 			squareArr2.forEach(classToggle);
 
