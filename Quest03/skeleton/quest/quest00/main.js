@@ -11,13 +11,7 @@ for(var i = 0; i < 5; i++){
 };
 
 /** Declaring the alternative text for each image file */
-var imgText = {
-    'pic1.jpg' : 'big eye',
-    'pic2.jpg' : 'desert',
-    'pic3.jpg' : 'flower',
-    'pic4.jpg' : 'mural',
-    'pic5.jpg' : 'butterfly'
-};
+var imgText = ['big eye','desert','flower','mural','butterfly'];
 /** Looping through images **/
 
 /**
@@ -32,7 +26,7 @@ var newImageArr = [];
 for(var i = 0; i < imgArr.length; i++){
     var newImage = document.createElement('img');
     newImage.setAttribute('src', 'images/'+imgArr[i]);
-    newImage.setAttribute('alt', imgText['pic'+(i+1)+'.jpg']);
+    newImage.setAttribute('alt', imgText[i]);
     thumbBar.appendChild(newImage);
 
     /** displayedImage의 src속성을 바꿔주기 위한 foreach문에 필요한 newImage 배열 생성 */
