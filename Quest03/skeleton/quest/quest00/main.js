@@ -46,23 +46,27 @@ newImageArr.forEach(displayed);
 /** Wiring up the Darken/Lighten button */
 
 /** btn클릭 시 btn 안의 글자가 Darken이면 어둡게, 아니라면 밝게 하는 함수 적용 */
+
+function textLight(){
+    darkBtn.setAttribute('class', 'light')
+    darkBtn.innerHTML = 'Lighten';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+}
+
+function textDark(){
+    darkBtn.setAttribute('class', 'dark')
+    darkBtn.innerHTML = 'Darken';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0)';
+}
+
 darkBtn.addEventListener('click', function(){
-    if(darkBtn.innerHTML === 'Darken'){
+    if(darkBtn.className === 'dark'){
         textLight();
     }else{
         textDark();
     }
 });
 
-function textLight(){
-    darkBtn.innerHTML = 'Lighten';
-    overlay.style.backgroundColor = 'rgba(0,0,0,0.6)';
-}
-
-function textDark(){
-    darkBtn.innerHTML = 'Darken';
-    overlay.style.backgroundColor = 'rgba(0,0,0,0)';
-}
 
 
 
