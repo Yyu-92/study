@@ -96,10 +96,18 @@
           userRps = this.value; 
           console.log(userRps);
           
-          /** 게임시작버튼에 정답 노출 & 보더색상 변경 */
+          /** 게임시작버튼에 정답 노출 & 보더색상 변경 & 모든 input 비활성화 */
           gameStartBtn.value = randomRps;
+          gameStartBtn.disabled = true;
           gameStartBtn.style.border = '2px solid #E9A691';
+          gameStartBtn.style.color = 'black';
+          
           this.style.border = '2px solid #E9A691';
+          this.style.color = 'black';
+          
+          for(var j = 0; j < btnArr.length; j++){
+            btnArr[j].disabled = true;
+          }
 
           /** ranRps와 userRps를 비교하여 승부내기 */
           if(randomRps === userRps){
@@ -114,6 +122,7 @@
             }
           }
 
+          
         });  
       }    
         
