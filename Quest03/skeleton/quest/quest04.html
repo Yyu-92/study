@@ -50,71 +50,81 @@
         5. 176 - 전부 맞으므로 승리 (resultArea 안에 1줄 추가  5회: 3S 승리!)     
           */
       	
-      /** TODO: 여기에 게임이 작동될 수 있도록 스크립트를 짜보세요  */
+      /** TODO: 여기에 게임이 작동될 수 있도록 스크립트를 짜보세요 */
 
-      /*
-        '게임시작'을 누르면 세자리의 랜덤값이 추출
-        세자리 숫자를 입력하고 '정답확인'을 누르면 정답이 맞는지 파악
-        9번시도안에 있는지 확인 -> 기회를 모두 소진하였습니다.
-        정답인지 확인 -> 정답입니다~
-        자리와 숫자가 맞는지 확인 -> 볼과 스트라이크, 카운트 표시
-        시도횟수 추가 
-      */
+      /**
+       * '게임시작'을 누르면 세자리의 랜덤값이 추출 -> 콘솔로 확인 가능
+       * 세자리 숫자를 입력하고 '정답확인'을 누르면 정답이 맞는지 파악
+       * 9번시도 안에 있는지 확인 -> 기회를 모두 소진하였습니다.
+       * 정답인지 확인 -> 정답입니다~
+       * 자리와 숫자가 맞는지 확인 -> 볼과 스트라이크, 카운트 표시
+       * 시도횟수 추가 
+       */
 
-      /*1-9중 중복되지 않는 세자리의 수 추출*/
+      /** 1-9중 중복되지 않는 세자리의 수 추출 */
       var list = [1,2,3,4,5,6,7,8,9]; 
-      var ranArr = [];
+      var randomArr = []; // 세자리수가 담길 배열
+      var answerArea = document.getElementsByClassName('resultArea')[0].getElementsByTagName('span')[0]; // '정답여부는 여기에'가 쓰여 있는 span
 
+      /** setDigitSubmit(게임시작) 버튼에 addEventListener를 부여하여 클릭했을 때 세자리수가 추출 */
       document.getElementsByClassName('setDigitSubmit')[0].addEventListener('click', function(){
         for(i = 0; i < 3; i++){
-          var ranNum = Math.floor(Math.random() * list.length);
-          ranArr[i] = list.splice(ranNum, 1)[0]; //splice(배열시작인덱스, 제거할갯수) ==> 배열로 빠짐
+          var randomNum = Math.floor(Math.random() * list.length); // random() 메소드에 list의 길이를 곱해줘서 1-9사이의 하나가 랜덤으로 선택될 수 있도록
+          randomArr[i] = list.splice(randomNum, 1)[0]; //splice(배열시작인덱스, 제거할갯수) ==> 원본 배열에 새로운 요소를 추가하거나 기존 요소를 삭제 또는 교체하여 원본 배열을 변경하고 제거된 배열을 반환(==> 배열로 빠짐)
         }   
-        console.log(ranArr);
+        console.log(randomArr);
+
         document.getElementsByClassName('guessField')[0].placeholder = "정답을 입력해주세요~!";   
+        answerArea.innerText = '★결과는~ 두둥!!★';
       });   
 
-      /*입력한 숫자와 랜덤추출된 숫자가 맞는지 확인하기*/
-      var cnt = 0;
-      var strike = 0;
-      var ball = 0;
+      /** 사용자가 입력한 숫자와 랜덤추출된 숫자가 맞는지 확인하기 */
+      var cnt = 0; // 카운트
+      var strike = 0; // 스트라이크
+      var ball = 0; // 볼
 
-      var resNum = null;
-      var resArr = null;
+      var resultNum = null; // 사용자가 입력한 정답숫자
+      var resultArr = null; // resuNum을 배열로 만들어줌
 
-      var span = document.getElementsByClassName('resultArea')[0].childNodes; // nodelist
-      span[1].setAttribute('id', 'resultAns');
-
-      /*'정답확인' 클릭시*/
+      /** guessSubmit(정답확인)에 addEventListener를 부여하여 클릭시 정답을 확인 */
       document.getElementsByClassName('guessSubmit')[0].addEventListener('click', function(){
         
-        /*입력한 숫자 쪼개기*/
-        resNum = document.getElementsByClassName('guessField')[0].value;
-        resArr = resNum.split('');
-
-        /*입력한 숫자가 유효한지 확인하기*/
-        if(resArr.length != 3){
-        alert('3자리 숫자를 입력해주세요.');
-        }else if(new Set(resArr).size < 3){ // new Set() ==> 배열을 전달하면 중복 값을 제거하고 고유한 값을 가지는 새로운 배열을 생성
+        /** 입력한 숫자 쪼개기 */
+        resultNum = document.getElementsByClassName('guessField')[0].value;
+        resultArr = resultNum.split(''); // split('구분자') ==> 구분자로 잘라서 배열로 저장하여 반환 
+        
+        /** 사용자가 입력한 숫자가 유효한지 확인하기 */
+        /** 중복이 있는지 검사하는 함수 */
+        function isDuplication(numerals){
+          return numerals.some(function(numeral){ // array.some() ==> 일부 값이 조건을 만족하면 true를 반환
+            return numerals.indexOf(numeral) !== numerals.lastIndexOf(numeral); // inidexOf() ==> 요소값을 검색하고 첫번째 항목의 위치를 반환, lastIndexOf() ==> 마지막 항목의 위치를 반환 ==> 다르면 true를 반환. 이는 중복값이 있다는 것
+          });
+        }     
+ 
+        if(resultArr.length !== 3 || resultArr.indexOf('0') !== -1 || isNaN(resultNum)){ // array.indexOf() ==> 문자를 가지고 있지 않으면 -1을 반환
+        alert('1이상인 3자리 숫자를 입력해주세요.');
+        //}else if(new Set(resultArr).size < 3){ // new Set() ==> 배열을 전달하면 중복 값을 제거하고 고유한 값을 가지는 새로운 배열을 생성
+        }else if(isDuplication(resultArr)){ 
           alert('숫자가 중복되었습니다.');
         }else{
           
-          /*카운트 증가*/
+          /** 카운트 증가 */
           cnt++;
           
-          /*strike, ball 초기화*/
+          /** strike, ball 초기화 */
           strike = 0;
           ball = 0;
-
-          //document.getElementById('resultAns').innerText = '★결과는~ 두둥!!★'; <--이거 해결해야함~~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-          /*자리와 숫자 모두 일치하면 strike증가 숫자만 일치하면 ball증가*/
-          for(var i = 0; i < 3; i++){
-            for(var j = 0; j < 3; j++){
-              if(ranArr[i] == resArr[j]){
-                if(i == j){
+          
+          /** 
+           * 반복문을 돌면서 
+           * 자리와 숫자 모두 일치하면 strike증가 숫자만 일치하면 ball증가 
+           */
+          for(var i = 0; i < 3; i++){ // randomArr
+            for(var j = 0; j < 3; j++){ // resultArr
+              if(randomArr[i] == resultArr[j]){ // 숫자가 일치
+                if(i === j){ // 자리까지 일치
                   strike++;
-                }else{
+                }else{ // 숫자만 일치
                   ball++;
                 }
                 break;
@@ -122,30 +132,30 @@
             }  
           }; 
 
-          /*스트라이크, 볼, 카운트 표시*/ 
-          if(strike == 3 && cnt <= 9){ 
-            document.getElementById('resultAns').innerHTML += '<br>' + cnt + '회만에 정답을 맞추셨습니다~!';
+          /** 정답확인 버튼 비활성화 함수 */
+          function disabled(){
+            document.getElementsByClassName('guessSubmit')[0].disabled = true;
+          }
+
+          /** 정답여부 표시
+           * 스트라이크, 볼, 카운트 표시 
+           */ 
+          if(strike === 3 && cnt <= 9){ 
+            answerArea.innerHTML += '<br> ★★정답은 ' + resultNum + '입니다!! ' + cnt + '회만에 정답을 맞추셨습니다~!★★';
             disabled();
           }else if(cnt > 9){
-            alert(cnt-1 + "번의 기회를 모두 소진하셨습니다ㅠㅠ");
+            alert(cnt-1 + "번의 기회를 모두 소진하셨습니다ㅠㅠ"); // 10번째 시도일 때 alert창
             disabled();
           }else{
-            if(strike == 0 && ball == 0){
-              document.getElementById('resultAns').innerHTML += '<br>' + cnt + '회차: 아웃!!!! (남은 횟수: ' + (9 - cnt) + '회)';
+            if(strike === 0 && ball === 0){
+              answerArea.innerHTML += '<br>' + cnt + '회차(' + resultNum + ') => 아웃!!!! (남은 횟수: ' + (9 - cnt) + '회)';
             }else{
-              document.getElementById('resultAns').innerHTML += '<br>' + cnt + '회차: ' + strike + '스트라이크' + ball + '볼 (남은 횟수: ' + (9 - cnt) + '회)';
+              answerArea.innerHTML += '<br>' + cnt + '회차(' + resultNum + ') => ' + strike + '스트라이크' + ball + '볼 (남은 횟수: ' + (9 - cnt) + '회)';
             } 
-          };
-           
-        };
-  
+          };          
+        };  
       });
-
-      /*버튼 비활성화 함수*/
-      function disabled(){
-        document.getElementsByClassName('guessSubmit')[0].disabled = true;
-      }
-
+      
     </script>
   </body>
 </html>

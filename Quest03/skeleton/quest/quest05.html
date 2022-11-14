@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>가위바위보 게임</title>
+
+    <style>
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>가위바위보 게임</h1>
+
+    <li style="margin-bottom:5px;">게임시작을 누르면 랜덤값으로 가위,바위,보중 하나가 지정됩니다.</li>
+    <li style="margin-bottom:15px;">유저도 가위,바위,보중에 하나를 선택하고 결과를 확인합니다.</li>
+    <div class="setDigitForm">
+      <input type="button" value="게임시작" class="setPrsSubmit" style="width:310px;">
+    </div>
+	
+    <div class="form" style="margin-top:40px;">
+      <input type="button" id="btnScissors" value="가위" class="btnScissors" style="width:100px;">
+      <input type="button" id="btnRock" value="바위" class="btnRock" style="width:100px;">
+      <input type="button" id="btnPaper" value="보" class="btnPaper" style="width:100px;">
+    </div>
+
+    <div class="resultArea" style="margin-top:40px;">
+      <span>승패여부는 여기에!!</span>
+    </div>
+
+    <script>
+      /** TODO: 여기에 게임이 작동될 수 있도록 스크립트를 짜보세요  */
+      /**
+       * 게임시작을 누르면 가위, 바위, 보 중 하나가 지정되어 변수 randomRps에 담긴다.
+       * 사용자가 선택한 값을 변수 userRps 에 담기
+       * randomRps와 userRps를 비교하여 승패 가르기
+       */
+      
+      /** 게임시작 클릭시 가위, 바위, 보 중 랜덤값 지정하기 */
+      var randomNum = ''; // 랜덤값이 담길 변수
+      var randomRps = ''; // 가위, 바위, 보 중 하나가 담길 변수
+      var gameStartBtn = document.getElementsByClassName('setPrsSubmit')[0]; // 게임시작버튼
+     
+      /** setPrsSubmit(게임시작)에 addEventListener를 부여해서 클릭했을 때 가위, 바위, 보 중 하나가 지정 */
+      gameStartBtn.addEventListener('click', function(){
+        /** 0,1,2 중 랜덤으로 값을 받아 0이면 가위, 1이면 바위, 2이면 보가 변수 randomRps에 담기도록 한다. */ 
+        randomNum = Math.floor(Math.random()*3); // 0~2.9999xx
+        switch(randomNum){
+          case 0 :
+            randomRps = '가위';
+            break;
+          case 1 :
+            randomRps = '바위';
+            break;
+          case 2 :
+            randomRps = '보';
+            break;
+          default :
+            alert('오류입니다ㅠ');
+        }
+
+        /** 확인을 위해 콘솔창에 ranRps값 출력 */
+        console.log(randomRps);
+      });
+
+      /** 사용자가 가위, 바위, 보 중 선택하면 승패의 결과가 나오기 */
+      var scissorsBtn = document.getElementById('btnScissors');
+      var rockBtn = document.getElementById('btnRock');
+      var paperBtn = document.getElementById('btnPaper');
+      var btnArr = [scissorsBtn, rockBtn, paperBtn];
+
+      var userRps = ''; // 사용자가 선택한 버튼의 value를 담을 변수
+
+      var answerArea = document.getElementsByClassName('resultArea')[0].getElementsByTagName('span')[0]; // 승패여부는 여기에!!
+
+      var draw = '비겼습니다.';
+      var lose = '당신은 졌습니다ㅠㅠ';
+      var win = '당신이 이겼습니다~☆☆☆';
+      
+      
+      // function disabled(pickTag){
+      //   pickTag.disabled = true;
+      // }
+
+      for(var i = 0; i < btnArr.length; i++){
+        btnArr[i].addEventListener('click',function(){
+          
+          /** 클릭한 버튼의 value값 가져오기 */
+          userRps = this.value; 
+          console.log(userRps);
+          
+          /** 게임시작버튼에 정답 노출 & 보더색상 변경 */
+          gameStartBtn.value = randomRps;
+          gameStartBtn.style.border = '2px solid #E9A691';
+          this.style.border = '2px solid #E9A691';
+
+          /** ranRps와 userRps를 비교하여 승부내기 */
+          if(randomRps === userRps){
+            answerArea.innerText = draw;
+          }else{
+            if(randomRps === '가위'){
+              answerArea.innerText = userRps === '바위' ? win : lose;
+            }else if(randomRps === '바위'){
+              answerArea.innerText = userRps === '보' ? win : lose;
+            }else{ // '보'일때
+              answerArea.innerText = userRps === '가위' ? win : lose;
+            }
+          }
+
+        });  
+      }    
+        
+    
+    </script>
+  </body>
+</html>
