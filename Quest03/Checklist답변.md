@@ -7,8 +7,6 @@
     <tr><th>버전</th><th>특징</th></tr>
     <tr><td>ES1(1997)</td><td>-</td></tr>
     <tr><td>ES2(1998)</td><td>-</td></tr>
-    <tr><td>ES3(1999)</td><td>-</td></tr>
-    <tr><td>ES4</td><td>언어에 얽힌 정치적, 견해의 차이로 버려졌다.</td></tr>
     <tr>
         <td><b>ES3(1999)<b></td>
         <td>- 우리가 흔히 말하는 자바스크립트</br>
@@ -17,6 +15,7 @@
             - add <b>try/catch, switch, do-while</b>
         </td>
     </tr>
+    <tr><td>ES4</td><td>언어에 얽힌 정치적, 견해의 차이로 버려졌다.</td></tr>
     <tr>
         <td><b>ES5(2009)</b></td>
         <td>- IE9부터 본격적으로 지원하지만 es5-shim을 사용하면 하위 버전에서도 특정 기능들을 지원해준다.</br>
