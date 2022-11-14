@@ -38,71 +38,85 @@
     </div>
 
     <script>
-      /** TODO: 여기에 게임이 작동될 수 있도록 스크립트를 짜보세요 **/
+      /** TODO: 여기에 게임이 작동될 수 있도록 스크립트를 짜보세요 */
 
       /**
-      1-3자릿수 랜덤값뽑기
-      숫자를 입력하고 등록을 누르면 해당 숫자만큼의 자릿수를 가진 2개의 숫자가 랜덤으로 추출
-     추출된 2개의 랜덤숫자가 각각 랜덤값A,B에 표시
-      정답을 입력하고 정답확인을 누르면 정답여부가 표시
-     **/
+       * 1-3자릿수 랜덤값뽑기
+       * 숫자를 입력하고 등록을 누르면 해당 숫자만큼의 자릿수를 가진 2개의 숫자가 랜덤으로 추출되어 각각 랜덤값A,B부분에 표시
+       * 정답을 입력하고 정답확인을 누르면 정답여부가 표시
+       */
 
-      var ranNum1 = 0;
+      var ranNum1 = 0; // 두개의 랜덤값
       var ranNum2 = 0;
-      var max = 0;
+      var max = 0; // 랜덤값을 뽑을 때 사용할 각 자릿수의 최댓값과 최솟값
       var min = 0;
+      var inputNum = 0; // 사용자가 입력할 자릿수
     
-      /**랜덤값 뽑기**/
+      /** setDigitSubmit('등록')에 addEventListener을 부여하여 클릭했을 때 랜덤값 뽑기 */
       document.getElementsByClassName('setDigitSubmit')[0].addEventListener('click', function(){
-        var inputNum = document.getElementById('setDigitNum').value;
-
-        /**Math.floor((Math.random()*(max-min))+min) ==> 자릿수에 따라 max와 min을 변경하여 자릿수에 맞는 랜덤값 추출
-        Math.floor() ==> 소수점 이하를 버림**/
-        if(inputNum == 1){
-          max = 10;
-          min = 1;
-        }else if(inputNum == 2){
-          max = 100;
-          min = 10;
-        }else if(inputNum == 3){
-          max = 1000;
-          min = 100;
-        }else{
-          alert("3자릿수 이하로 입력해주세요~!");
-        }
+        inputNum = Number(document.getElementById('setDigitNum').value); // string -> number 형변환
         
-        ranNum1 = Math.floor((Math.random()*(max-min))+min);
-        ranNum2 = Math.floor((Math.random()*(max-min))+min);
+        /**
+         * 입력한 자릿수에 따라 랜덤값을 다르게 제공
+         * Math.random() ==> 0.0000000~0.9999999 사이의 랜덤값 제공
+         * Math.floor((Math.random()*(max-min))+min) ==> 자릿수에 따라 max와 min을 변경하여 자릿수에 맞는 랜덤값 추출
+         * ex)1자릿수 추출=> 그냥 10을 곱하면, 0~9.xxxxx의 값이 나온다.
+         * 1~9의 값이 나와야하기 때문에 10(max)-1(min)=9를 곱해주면, 0~8.xxxxx의 값이 나오고 여기서 1(min)값을 더해주면 1~9.xxxxx의 값이 나온다. 
+         * Math.floor() ==> 소수점 이하를 버림
+         */
 
-        /**추출된 랜덤값이 화면에 출력**/
-        document.getElementById('randA').innerText = ranNum1;
-        document.getElementById('randB').innerText = ranNum2;
-
-        document.getElementById('guessField').placeholder = '정답을 입력해주세요.'
-      });
-
-      /**정답확인하기**/
-      /**정답영역 span 선택해서 id 속성 부여하기*/
-      var span = document.getElementsByClassName('resultArea')[0].childNodes; // nodelist
-      span[1].setAttribute('id', 'resultNum');
-      
-      /**정답을 입력하고 '정답확인'을 누르면 정답여부가 표시**/
-      document.getElementsByClassName('guessSubmit')[0].addEventListener('click', function(){
-        var resNum = document.getElementById('guessField').value;
-
-        if(ranNum1 * ranNum2 == resNum){
-          document.getElementById('resultNum').innerText = resNum + "은 정답입니다~!";
-          disabled();
+        if(isNaN(inputNum) || inputNum === 0 || inputNum > 3){ // isNaN ==> 매개변수가 숫자가 아니면 true, 숫자이면 false를 반환
+          alert("숫자이며 1~3사이여야합니다~!");
+        }else{     
+          switch(inputNum){
+            case 1 :
+              max = 10;
+              min = 1;
+              break;
+            case 2 :
+              max = 100;
+              min = 10;
+              break;
+            case 3 :
+              max = 1000;
+              min = 100;
+              break;
+            default :
+            alert("숫자이며 1~3사이여야합니다~!");
+          }
           
-        }else{
-          document.getElementById('resultNum').innerText = resNum + "은 정답이 아닙니다~!";
-        }
+          ranNum1 = Math.floor((Math.random()*(max-min))+min);
+          ranNum2 = Math.floor((Math.random()*(max-min))+min);
+
+          /** 사용자가 볼 수 있도록 추출된 랜덤값이 화면에 출력 */
+          document.getElementById('randA').innerText = ranNum1;
+          document.getElementById('randB').innerText = ranNum2;
+
+          document.getElementById('guessField').placeholder = '정답을 입력해주세요.';
+        }   
       });
 
-      /**버튼 비활성화 함수**/
+      /** 정답확인하기 */
+      var answerArea = document.getElementsByClassName('resultArea')[0].getElementsByTagName('span')[0];
+      var resNum = 0; // 사용자가 입력한 정답숫자
+
+      /** 버튼 비활성화 함수 */
       function disabled(){
         document.getElementsByClassName('guessSubmit')[0].disabled = true;
       }
+      
+      /** 정답을 입력하고 '정답확인'을 누르면 정답여부가 표시 */
+      document.getElementsByClassName('guessSubmit')[0].addEventListener('click', function(){
+        resNum = Number(document.getElementById('guessField').value); // string -> number 형변환
+
+        if(ranNum1 * ranNum2 === resNum){
+          answerArea.innerText = resNum + "은(는) 정답입니다~!";
+          disabled();
+          
+        }else{
+          answerArea.innerText = resNum + "은(는) 정답이 아닙니다~!";
+        }
+      });
 
     </script>
   </body>
