@@ -53,7 +53,7 @@
       /** TODO: 여기에 게임이 작동될 수 있도록 스크립트를 짜보세요 */
 
       /**
-       * '게임시작'을 누르면 세자리의 랜덤값이 추출 -> 콘솔로 확인 가능
+       * '게임시작'을 누르면 세자리의 랜덤값이 추출
        * 세자리 숫자를 입력하고 '정답확인'을 누르면 정답이 맞는지 파악
        * 9번시도 안에 있는지 확인 -> 기회를 모두 소진하였습니다.
        * 정답인지 확인 -> 정답입니다~
@@ -68,9 +68,9 @@
 
       /** setDigitSubmit(게임시작) 버튼에 addEventListener를 부여하여 클릭했을 때 세자리수가 추출 */
       document.getElementsByClassName('setDigitSubmit')[0].addEventListener('click', function(){
-        for(i = 0; i < 3; i++){
+        for(var i = 0; i < 3; i++){ 
           var randomNum = Math.floor(Math.random() * list.length); // random() 메소드에 list의 길이를 곱해줘서 1-9사이의 하나가 랜덤으로 선택될 수 있도록
-          randomArr[i] = list.splice(randomNum, 1)[0]; //splice(배열시작인덱스, 제거할갯수) ==> 원본 배열에 새로운 요소를 추가하거나 기존 요소를 삭제 또는 교체하여 원본 배열을 변경하고 제거된 배열을 반환(==> 배열로 빠짐)
+          randomArr[i] = list.splice(randomNum, 1); //splice(배열시작인덱스, 제거할갯수) ==> 원본 배열에 새로운 요소를 추가하거나 기존 요소를 삭제 또는 교체하여 원본 배열을 변경하고 제거된 배열을 반환(==> 배열로 빠짐)
         }   
         console.log(randomArr);
 
@@ -82,13 +82,13 @@
       var strike = 0; // 스트라이크
       var ball = 0; // 볼
 
-      var resultNum = null; // 사용자가 입력한 정답숫자
-      var resultArr = null; // resuNum을 배열로 만들어줌
+      var resultNum = ''; // 사용자가 입력한 정답숫자
+      var resultArr = []; // resuNum을 배열로 만들어줌
 
       /** guessSubmit(정답확인)에 addEventListener를 부여하여 클릭시 정답을 확인 */
       document.getElementsByClassName('guessSubmit')[0].addEventListener('click', function(){
         
-        /** 입력한 숫자 쪼개기 */
+        /** 사용자가 입력한 숫자 쪼개기 */
         resultNum = document.getElementsByClassName('guessField')[0].value;
         resultArr = resultNum.split(''); // split('구분자') ==> 구분자로 잘라서 배열로 저장하여 반환 
         
@@ -141,7 +141,7 @@
            */ 
 
           if(strike === 3 && cnt <= 9){ 
-            answerArea.innerHTML += '<br> ★★정답은 ' + resultNum + '입니다!! ' + cnt + '회만에 정답을 맞추셨습니다~!★★';
+            answerArea.innerHTML += '<br> ★★정답은 ' + resultNum + '입니다!! ' + cnt + '회만에 정답을 맞추셨습니다~!★★'; // 대입연산자를 이용해서 문구가 삭제되지 않고 아래에 나타나도록
             disabled();
           }else if(cnt > 9){
             alert(cnt-1 + "번의 기회를 모두 소진하셨습니다ㅠㅠ"); // 10번째 시도일 때 alert창
