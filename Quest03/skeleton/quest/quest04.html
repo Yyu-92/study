@@ -75,7 +75,6 @@
         console.log(randomArr);
 
         document.getElementsByClassName('guessField')[0].placeholder = "정답을 입력해주세요~!";   
-        answerArea.innerText = '★결과는~ 두둥!!★';
       });   
 
       /** 사용자가 입력한 숫자와 랜덤추출된 숫자가 맞는지 확인하기 */
@@ -140,6 +139,7 @@
           /** 정답여부 표시
            * 스트라이크, 볼, 카운트 표시 
            */ 
+
           if(strike === 3 && cnt <= 9){ 
             answerArea.innerHTML += '<br> ★★정답은 ' + resultNum + '입니다!! ' + cnt + '회만에 정답을 맞추셨습니다~!★★';
             disabled();
