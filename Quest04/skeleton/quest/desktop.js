@@ -48,48 +48,57 @@ function createFolder(){
 	}
 	//console.log('folder : ' + folder);
 	//console.log('folderArr : ' + folderArr);
-	/** 아이콘들을 드래그를 통해 움직일 수 있어야 합니다. */
-	function movingIcon(selectIcon){
-		selectIcon.addEventListener('mousedown', function(e){
-			e.preventDefault(); 
-			startX = e.clientX; // 처음 파일 x좌표 - 클릭한 위치값
-			startY = e.clientY; // 처음 파일 y좌표 - 클릭한 위치값
-			selectIcon.style.position = 'absolute';
-			console.log(startX, startY);
-			
-			document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
-			document.addEventListener('mousemove', onMove); 
-		});
-		
-		/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
-		function onRemoveEvent() { 
-			selectIcon.style.position = 'fixed';
-			document.removeEventListener('mouseup', onRemoveEvent); 
-			document.removeEventListener('mousemove', onMove); 
-		} 
-		
-		function onMove(e) { 
-			e.preventDefault(); 
-			selectIcon.style.position = 'fixed';
-
-			lastX = startX - e.clientX; 
-			lastY = startY - e.clientY;
-			//console.log(lastX, lastY);
-			
-			startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
-			startY = e.clientY; 
-			console.log(startX, startY)
-			selectIcon.style.left = (selectIcon.offsetLeft- lastX)+"px";
-			selectIcon.style.top = (selectIcon.offsetTop - lastY)+"px";
-		}
 	
+	folderArr.forEach(movingIcon);
+
+	function doubleClick(){
+		
 	}
 
-	folderArr.forEach(movingIcon);
+	doubleClick(folder)
+
 	return folder;
 }
 
 document.getElementById('folderSubmit').addEventListener('click', createFolder);
+
+
+/** 아이콘들을 드래그를 통해 움직일 수 있어야 합니다. */
+function movingIcon(selectIcon){
+	selectIcon.addEventListener('mousedown', function(e){
+		e.preventDefault(); 
+		startX = e.clientX; // 처음 파일 x좌표 - 클릭한 위치값
+		startY = e.clientY; // 처음 파일 y좌표 - 클릭한 위치값
+		selectIcon.style.position = 'absolute';
+		console.log(startX, startY);
+		
+		document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
+		document.addEventListener('mousemove', onMove); 
+	});
+	
+	/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
+	function onRemoveEvent() { 
+		selectIcon.style.position = 'fixed';
+		document.removeEventListener('mouseup', onRemoveEvent); 
+		document.removeEventListener('mousemove', onMove); 
+	} 
+	
+	function onMove(e) { 
+		e.preventDefault(); 
+		selectIcon.style.position = 'fixed';
+
+		lastX = startX - e.clientX; 
+		lastY = startY - e.clientY;
+		//console.log(lastX, lastY);
+		
+		startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
+		startY = e.clientY; 
+		console.log(startX, startY)
+		selectIcon.style.left = (selectIcon.offsetLeft- lastX)+"px";
+		selectIcon.style.top = (selectIcon.offsetTop - lastY)+"px";
+	}
+
+}
 
 //console.log('folder : ' + folder);
 // console.log('folderArr : ' + folderArr);
