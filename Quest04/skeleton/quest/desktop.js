@@ -1,11 +1,7 @@
 class Desktop {
 	/* TODO: Desktop 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
-	constructor(screen, constBtn, inputValue, buildImg, imgSrc){
-		this.screen = screen;
-		this.constBtn = constBtn;
-		this.inputValue = inputValue;
-		this.buildImg = buildImg;
-		this.imgSrc = imgSrc;
+	constructor(){
+	
 	}
 
 	
@@ -23,54 +19,142 @@ class Window {
 	/* TODO: Window 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
 };
 
-/** 바탕화면의 생성자를 통해 처음에 생겨날 아이콘과 폴더의 개수를 받을 수 있습니다. */
-/** 생성 클릭시 폴더 및 아이콘 생성 */
 let desktop = document.getElementsByClassName('desktop')[0];
-let folderValue = 0;
+let folderArr = [];
 let lastX = 0;
 let lastY = 0; 
 let startX = 0; 
-let startY = 0; 
-let folder ='';
-let folderArr = [];
+let startY = 0;
+let wallpaper = ''; 
+let wallpaperInner = '';
+let menuBar = '';
+let tabPlus = '';
+let tabList = '';
+let tabClose = '';
 
-function createFolder(){
-	folderValue = Number(document.getElementById('folderConst').value);
-	
-	for(let i = 0; i < folderValue; i++){
-		folder = document.createElement('img');
-		folder.setAttribute('src', 'images/folder.png');
-		folder.setAttribute('alt', 'folder');
-		folder.setAttribute('class', 'folder')
-		desktop.appendChild(folder);	
+let body = document.querySelector('body');
 
-		folderArr.push(folder);
-	}
-	//console.log('folder : ' + folder);
-	//console.log('folderArr : ' + folderArr);
-	
-	folderArr.forEach(movingIcon);
+let header = document.createElement('header');
+header.setAttribute('class', 'header');
+desktop.before(header);
 
-	function doubleClick(){
-		
-	}
+let tabBar = document.createElement('div');
+tabBar.setAttribute('class', 'tab-bar');
+header.append(tabBar);
 
-	doubleClick(folder)
+/** tab 만들기 */
+function setCreatePlusTab(){
+	tabList = document.createElement('a');
+	tabClose = document.createElement('button');
+	tabList.setAttribute('class', 'tablist');
+	tabClose.setAttribute('class', 'tabclose');
+	tabClose.innerText = 'X';
+	tabList.innerText = '유진의 바탕화면👀';
+	//tabList.style.width = '180px';
+	tabBar.append(tabList);
+	tabList.append(tabClose);
 
-	return folder;
+	clickClose(tabClose);
+
+	return tabClose;
 }
 
-document.getElementById('folderSubmit').addEventListener('click', createFolder);
+setCreatePlusTab();
+
+/** tab 플러스 버튼 만들기 */
+function setCreatePlusBtn(){
+	tabPlus = document.createElement('button');
+	tabPlus.setAttribute('class', 'tabplus');
+	tabPlus.innerText = '+'
+	tabBar.append(tabPlus);
+
+	return tabPlus;
+}
+setCreatePlusBtn();
+console.log(tabPlus);
+
+/** 바탕화면 만들기 */
+function setCreateWallpaper(){
+	wallpaper = document.createElement('div');
+	wallpaperInner = document.createElement('div');
+	wallpaper.setAttribute('class', 'wallpaper');
+	wallpaperInner.setAttribute('class', 'wallpaper-inner');
+	desktop.append(wallpaper);
+	wallpaper.append(wallpaperInner);
+
+	return wallpaperInner;
+}
+setCreateWallpaper();
+console.log(wallpaper);
+
+/**  */
+function setCreateMenubar(){
+	menuBar = document.createElement('div');
+	menuBar.setAttribute('class', 'menu-bar');
+	wallpaperInner.append(menuBar);
+
+	return menuBar;
+}
+
+setCreateMenubar();
+console.log(menuBar);
+
+/** tabplustbtn 클릭 시 tab&&바탕화면 생성 */
+tabPlus.addEventListener('click', function(){
+	setCreatePlusTab();
+	setCreateWallpaper();
+	setCreateMenubar();
+	setCreateInput();
+});
 
 
-/** 아이콘들을 드래그를 통해 움직일 수 있어야 합니다. */
+
+// for(let j = 0; j < tabListArr.lenght; j++){
+// 	(function(j){
+// 		tabListArr[j].addEventListener('click', function(){
+// 			wallpaperArr[j].style.zIndex = 999;
+// 		});
+// 	})(j);
+// }
+// console.log(tabListArr)
+
+/** 생성input 만들기 */
+function setCreateInput(){
+	for(let i = 0; i < 2; i++){
+		let inputArea = document.createElement('input');
+		inputArea.type = 'text';
+		inputArea.class = 'constructor';
+		inputArea.id = (i == 0) ? 'folderConst' : 'iconConst';
+		inputArea.placeholder = (i == 0) ? '폴더 갯수를 입력해주세요.' : '아이콘 갯수를 입력해주세요.';
+
+		let SubmitBtn = document.createElement('input');
+		SubmitBtn.type = 'submit';
+		SubmitBtn.value = '생성';
+		SubmitBtn.id = (i == 0) ? 'folderSubmit' : 'iconSubmit';
+
+		menuBar.append(inputArea);
+		menuBar.append(SubmitBtn);
+	}
+}
+
+setCreateInput();
+
+/** 아이콘 드래그 */
 function movingIcon(selectIcon){
 	selectIcon.addEventListener('mousedown', function(e){
 		e.preventDefault(); 
-		startX = e.clientX; // 처음 파일 x좌표 - 클릭한 위치값
-		startY = e.clientY; // 처음 파일 y좌표 - 클릭한 위치값
-		selectIcon.style.position = 'absolute';
-		console.log(startX, startY);
+		
+		/** 마우스 왼쪽클릭 0 / 오른쪽 2 / 휠 1 */
+		if(e.button !== 0){ 
+			return;
+		}
+		
+		startX = e.clientX // 처음 파일 x좌표 - 클릭한 위치값
+		startY = e.clientY // 처음 파일 y좌표 - 클릭한 위치값
+		if(! this){
+
+		}
+		//this.style.position = 'absolute';
 		
 		document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
 		document.addEventListener('mousemove', onMove); 
@@ -86,83 +170,96 @@ function movingIcon(selectIcon){
 	function onMove(e) { 
 		e.preventDefault(); 
 		selectIcon.style.position = 'fixed';
-
-		lastX = startX - e.clientX; 
-		lastY = startY - e.clientY;
+	
+		lastX = e.clientX - startX; // 이동한 거리 x
+		lastY = e.clientY - startY; // 이동한 거리 y
 		//console.log(lastX, lastY);
 		
 		startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
 		startY = e.clientY; 
-		console.log(startX, startY)
-		selectIcon.style.left = (selectIcon.offsetLeft- lastX)+"px";
-		selectIcon.style.top = (selectIcon.offsetTop - lastY)+"px";
+
+		selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
+		selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";
+		//console.log(startX, startY)
 	}
 
 }
 
-//console.log('folder : ' + folder);
-// console.log('folderArr : ' + folderArr);
+
+/** 폴더창닫기 */
+function clickClose(btn){
+	btn.addEventListener('click', function(){
+		this.parentElement.style.display = 'none';	
+	});
+}
 
 
+/** 아이콘생성 */
+function createIcon(name){
+	name.addEventListener('click', function(){
+		folderValue = (name == folderSubmit) ? Number(document.getElementById('folderConst').value) : Number(document.getElementById('iconConst').value);
+		console.log(folderValue);
+		for(let i = 0; i < folderValue; i++){
+			let icon = document.createElement('img');
+			icon.src = (name == folderSubmit) ? 'images/folder.png' : 'images/file.png';
+			icon.alt = (name == folderSubmit) ? 'folder' : 'file';
+			icon.class = icon.alt;
+			wallpaperInner.appendChild(icon);	
+			//icon.after(icon.class);
+
+			folderArr.push(icon);
+		}
+		folderArr.forEach(movingIcon); 
+		folderArr.forEach(doubleClick);
+
+		document.getElementById('folderConst').value = '';
+		document.getElementById('iconConst').value = '';
+
+	});
+}
+    
+let folderSubmit = document.getElementById('folderSubmit');
+let iconSubmit = document.getElementById('iconSubmit');
+
+createIcon(folderSubmit);
+createIcon(iconSubmit);
+
+let folderImg = document.getElementsByTagName('img'); // HTMLCollection
+//let folderArr = [].slice.call(folderImg); // => 배열로 변환
 
 
-
-
-
-
-
-
-// document.getElementById('iconSubmit').addEventListener('click', function(){
-// 	var iconValue = document.getElementById('iconConst').value;
-// 	for(var i = 0; i < iconValue; i++){
-// 		var file = document.createElement('img');
-// 		file.setAttribute('src', 'images/file.png');
-// 		file.setAttribute('alt', 'folder');
-// 		file.setAttribute('class', 'files')
-// 		desktop.appendChild(file);	
-// 	}
-	
-// 	var lastX = 0;
-// 	var lastY = 0; 
-// 	var startX = 0; 
-// 	var startY = 0; 
-
-	
-// 	file.addEventListener('mousedown', function(e){
-// 		e.preventDefault(); 
-// 		startX = e.clientX; // 처음 파일 x좌표 - 클릭한 위치값
-// 		startY = e.clientY; // 처음 파일 y좌표 - 클릭한 위치값
-// 		console.log(startX, startY);
+/** 아이콘 더블클릭시 폴더창 생성 및 드래그 */
+function doubleClick(aa){
+	aa.addEventListener('dblclick', function(){
+		let folderWindow = document.createElement('div');
+		let closeBtn = document.createElement('button');
+		folderWindow.setAttribute('class', 'folderWindow');
+		folderWindow.innerText = '폴더입니다^^휴;;';
+		wallpaperInner.append(folderWindow);
 		
-// 	document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
-	
-// 	document.addEventListener('mousemove', onMove); 
-// 	});
+		closeBtn.setAttribute('class', 'close');
+		closeBtn.innerText = 'X';
+		folderWindow.append(closeBtn);
 
-// 	function onRemoveEvent() { 
-// 		document.removeEventListener('mouseup', onRemoveEvent); 
-// 		document.removeEventListener('mousemove', onMove); 
-// 	} 
+		movingIcon(folderWindow);
+		clickClose(closeBtn);	
+	});	
+}
 
-// 	function onMove(e) { 
-// 		e.preventDefault(); 
-// 		//lastX = (startX - file.offsetLeft)+"px"; 
-// 		//lastY = (startY - file.offsetTop)+"px"; 
-// 		lastX = startX -  e.clientX; 
-// 		lastY = startY - e.clientY;
-// 		// console.log(e.clientX, e.clientY);
-// 		// console.log(file.offsetLeft+"px", file.offsetTop+"px");
-// 		 console.log(lastX, lastY);
-		
-// 		//startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
-// 		//startY = e.clientY; 
 
-// 		file.style.left = (startX - lastX)+"px";
-// 		file.style.top = (startY - lastY)+"px";
-		
-// 	}
-	
-// });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
