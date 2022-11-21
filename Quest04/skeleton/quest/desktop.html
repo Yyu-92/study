@@ -6,24 +6,98 @@
 	</head>
 	<body>
 		<section class="desktop">
-			<!--<div class="menu-bar">
-				<input type="text" class="constructor" id="folderConst" placeholder="폴더 생성">
-				<input type="submit" value="생성" id="folderSubmit">
-				 <input type="text" class="constructor" id="iconConst" placeholder="아이콘 생성">
-				<input type="submit" value="생성" id="iconSubmit">
-			</div> -->
+			
 		</section>
 
 		<script src="./desktop.js"></script>
 		<script>
 
 		
-			let myDesktop = new Desktop(
-				/* TODO: myDesktop 인스턴스의 생성자의 변수로 무엇이 들어가야 할까요? */
+			// let myDesktop = new Desktop(
+			// 	/* TODO: myDesktop 인스턴스의 생성자의 변수로 무엇이 들어가야 할까요? */
 				
-			);
+			// );
+			
+			let myDesktop = new Desktop(1);
+			let submitBtn1 =  document.querySelector('#folderSubmit');
+			let submitBtn2 =  document.querySelector('#iconSubmit');
+			
+			document.querySelector('#wallpaper1').classList += ' current'
+		
+			submitBtn1.addEventListener('click', function(){
+				let folderValue = document.getElementById('folderConst').value;
+				let myFolder = new Folder(folderValue, 1);
+				myFolder.createFolder();
+
+				folderArr = document.querySelectorAll('.folder');
+				folderArr.forEach(myFolder.movingIcon);
+
+				let myWindow = new Window();
+				myWindow.doubleClick(folderArr);
+		
+
+				document.getElementById('folderConst').value = '';
+				
+			});
+			
+			submitBtn2.addEventListener('click', function(){
+				let iconValue = document.getElementById('iconConst').value;
+				let myIcon = new Icon(iconValue, 1);
+				myIcon.createIcon();
+
+				let iconArr = document.querySelectorAll('.file');
+				iconArr.forEach(myIcon.movingIcon);
+
+				document.getElementById('iconConst').value = '';
+			});
+
+			let myDesktop2 = new Desktop(2);
+			submitBtn1.addEventListener('click', function(){
+				let folderValue = document.getElementById('folderConst').value;
+				let myFolder2 = new Folder(folderValue, 2);
+				myFolder2.createFolder();
+
+				folderArr = document.querySelectorAll('.folder');
+				folderArr.forEach(myFolder2.movingIcon);
+
+				let myWindow2 = new Window(2);
+				myWindow2.doubleClick(folderArr);
+		
+
+				document.getElementById('folderConst').value = '';
+				
+			});
+			
+			submitBtn2.addEventListener('click', function(){
+				let iconValue = document.getElementById('iconConst').value;
+				let myIcon2 = new Icon(iconValue, 2);
+				myIcon2.createIcon();
+
+				let iconArr = document.querySelectorAll('.file');
+				iconArr.forEach(myIcon2.movingIcon);
+
+				document.getElementById('iconConst').value = '';
+			});
+			
+			
+			
+			wallpaper = [].slice.call(document.querySelectorAll('.wallpaper'));
+
+			for(let i = 0; i < tabListArr.length; i++){
+				(function(i){
+					tabListArr[i].addEventListener('click', function(){
+						for(let j = 0; j < wallpaper.length; j++){
+							wallpaper[j].classList.remove('current');
+						}
+						wallpaper[i].classList.add('current');
+					});
+				})(i);
+			}
+
 
 		
+			
+			
 		</script>	
 
 
