@@ -1,5 +1,5 @@
 let desktop = document.getElementsByClassName('desktop')[0];
-let folderArr = [];
+
 let lastX = 0;
 let lastY = 0; 
 let startX = 0; 
@@ -26,35 +26,36 @@ header.append(tabBar);
 
 class Desktop {
 	/* TODO: Desktop 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
-	constructor(indexNum, btn1, btn2){
+	constructor(indexNum){
 		this.indexNum = indexNum;
-		this.btn1 = btn1;
-		this.btn2 = btn2;
+		// this.btn1 = btn1;
+		// this.btn2 = btn2;
 		this.start();
 	}
 
 	start(){
 		this.setCreateTab();
 		this.setCreateWallpaper();
-		this.setCreateMenubar();
-		this.setCreateInput();
 		this.setCreatePlusBtn();
 	}
 
+	/** tab 만들기 */
 	setCreateTab(){
 		tabList = document.createElement('a');
-		tabClose = document.createElement('button');
 		tabList.setAttribute('class', 'tablist');
 		tabList.setAttribute('id', 'tablist'+this.indexNum);
 		tabList.innerText = '유진의 바탕화면👀';
+
+		tabClose = document.createElement('button');	
 		tabClose.setAttribute('class', 'tabclose');
 		tabClose.innerText = 'X';
+		
 		tabBar.append(tabList);
 		tabList.append(tabClose);
-	
 		tabListArr.push(tabList);
 	}
 
+	/** tab 플러스 버튼 만들기 */
 	setCreatePlusBtn(){
 		tabPlus = document.createElement('button');
 		tabPlus.setAttribute('class', 'tabplus');
@@ -62,23 +63,30 @@ class Desktop {
 		tabBar.append(tabPlus);
 	}
 
+	/** 바탕화면 만들기 */
 	setCreateWallpaper(){
 		wallpaper = document.createElement('a');
-		wallpaperInner = document.createElement('div');
 		wallpaper.setAttribute('class', 'wallpaper');
 		wallpaper.setAttribute('id', 'wallpaper'+this.indexNum);
+
+		wallpaperInner = document.createElement('div');
 		wallpaperInner.setAttribute('class', 'wallpaper-inner');
 		wallpaperInner.setAttribute('id', 'wallpaper-inner'+this.indexNum);
+		wallpaperInner.innerHTML = `<p> 🐬 바탕화면 ${this.indexNum} 입니다^^ 🐬 </p>`;
+	
 		desktop.append(wallpaper);
 		wallpaper.append(wallpaperInner);
 	}
 
+	/** menubar 만들기 */
 	setCreateMenubar(){
 		menuBar = document.createElement('div');
 		menuBar.setAttribute('class', 'menu-bar');
-		wallpaperInner.append(menuBar);
+		menuBar.setAttribute('id', 'menu-bar'+this.indexNum);
+		desktop.after(menuBar);
 	}
 
+	/** input 만들기 */
 	setCreateInput(){
 		for(let i = 0; i < 2; i++){
 			inputArea = document.createElement('input');
@@ -94,7 +102,6 @@ class Desktop {
 	
 			menuBar.append(inputArea);
 			menuBar.append(submitBtn);
-
 		}
 	}
 };
@@ -104,6 +111,7 @@ class DesktopExtends{
 
 	}
 	
+	/** 드래그 기능 */
 	movingIcon(selectIcon){
 		selectIcon.addEventListener('mousedown', function(e){
 			e.preventDefault(); 
@@ -116,14 +124,13 @@ class DesktopExtends{
 			startX = e.clientX // 처음 파일 x좌표 - 클릭한 위치값
 			startY = e.clientY // 처음 파일 y좌표 - 클릭한 위치값
 			
-			
 			document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
 			document.addEventListener('mousemove', onMove); 
 		});
 		
 		/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
 		function onRemoveEvent() { 
-			selectIcon.style.position = 'fixed';
+			//selectIcon.style.position = 'fixed';
 			document.removeEventListener('mouseup', onRemoveEvent); 
 			document.removeEventListener('mousemove', onMove); 
 		} 
@@ -134,14 +141,12 @@ class DesktopExtends{
 		
 			lastX = e.clientX - startX; // 이동한 거리 x
 			lastY = e.clientY - startY; // 이동한 거리 y
-			//console.log(lastX, lastY);
 			
 			startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
 			startY = e.clientY; 
 	
 			selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
 			selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";
-			//console.log(startX, startY)
 		}
 	
 	}
@@ -150,10 +155,9 @@ class DesktopExtends{
 
 class Icon extends DesktopExtends{
 	/* TODO: Icon 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
-	constructor(num, indexNum){
+	constructor(num){
 		super();
 		this.num = num;
-		this.indexNum = indexNum;
 	}
 	createIcon(){
 		for(let i = 0; i < this.num; i++){
@@ -161,17 +165,16 @@ class Icon extends DesktopExtends{
 			icon.src = 'images/file.png';
 			icon.alt = 'file';
 			icon.setAttribute('class', 'file');
-			document.querySelector('#wallpaper-inner'+this.indexNum).appendChild(icon);	
+			document.querySelector('.current').querySelector('.wallpaper-inner').appendChild(icon);	
 		}
 	}
 }
 
 class Folder extends DesktopExtends{
 	/* TODO: Folder 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
-	constructor(num, indexNum){
+	constructor(num){
 		super();
 		this.num = num;
-		this.indexNum = indexNum;
 	}
 	createFolder(){
 		for(let i = 0; i < this.num; i++){
@@ -179,8 +182,7 @@ class Folder extends DesktopExtends{
 			icon.src = 'images/folder.png';
 			icon.alt = 'folder';
 			icon.setAttribute('class', 'folder');
-			document.querySelector('#wallpaper-inner'+this.indexNum).appendChild(icon);		
-			
+			document.querySelector('.current').querySelector('.wallpaper-inner').appendChild(icon);		
 		}
 	}
 };
@@ -233,14 +235,12 @@ class Window{
 					
 						lastX = e.clientX - startX; // 이동한 거리 x
 						lastY = e.clientY - startY; // 이동한 거리 y
-						//console.log(lastX, lastY);
 						
-						startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
-						startY = e.clientY; 
-				
 						selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
 						selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";
-						//console.log(startX, startY)
+
+						startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
+						startY = e.clientY; 
 					}
 				
 				}
