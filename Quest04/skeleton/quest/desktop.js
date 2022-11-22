@@ -1,5 +1,8 @@
 let desktop = document.getElementsByClassName('desktop')[0];
-
+let folderValue;
+let iconValue;
+let folderArr = [];
+let iconArr = []; 
 let lastX = 0;
 let lastY = 0; 
 let startX = 0; 
@@ -15,6 +18,7 @@ let submitBtn = '';
 let folderWindow = '';
 let closeBtn = '';
 let tabListArr = [];
+
 
 let header = document.createElement('header');
 header.setAttribute('class', 'header');
@@ -53,6 +57,7 @@ class Desktop {
 		tabBar.append(tabList);
 		tabList.append(tabClose);
 		tabListArr.push(tabList);
+		
 	}
 
 	/** tab 플러스 버튼 만들기 */
@@ -114,6 +119,7 @@ class DesktopExtends{
 	/** 드래그 기능 */
 	movingIcon(selectIcon){
 		selectIcon.addEventListener('mousedown', function(e){
+			e = e || window.event;
 			e.preventDefault(); 
 			
 			/** 마우스 왼쪽클릭 0 / 오른쪽 2 / 휠 1 */
@@ -123,7 +129,7 @@ class DesktopExtends{
 			
 			startX = e.clientX // 처음 파일 x좌표 - 클릭한 위치값
 			startY = e.clientY // 처음 파일 y좌표 - 클릭한 위치값
-			
+		
 			document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
 			document.addEventListener('mousemove', onMove); 
 		});
@@ -136,21 +142,21 @@ class DesktopExtends{
 		} 
 		
 		function onMove(e) { 
+			e = e || window.event;
 			e.preventDefault(); 
+			
 			selectIcon.style.position = 'fixed';
-		
+			
 			lastX = e.clientX - startX; // 이동한 거리 x
 			lastY = e.clientY - startY; // 이동한 거리 y
 			
 			startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
 			startY = e.clientY; 
-	
+
 			selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
 			selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";
 		}
-	
 	}
-
 }
 
 class Icon extends DesktopExtends{
@@ -158,14 +164,17 @@ class Icon extends DesktopExtends{
 	constructor(num){
 		super();
 		this.num = num;
+		this.createIcon();
 	}
+
+	/** icon 만들기*/
 	createIcon(){
 		for(let i = 0; i < this.num; i++){
 			let icon = document.createElement('img');
 			icon.src = 'images/file.png';
 			icon.alt = 'file';
 			icon.setAttribute('class', 'file');
-			document.querySelector('.current').querySelector('.wallpaper-inner').appendChild(icon);	
+			document.querySelector('.current').querySelector('.wallpaper-inner').append(icon);	
 		}
 	}
 }
@@ -175,27 +184,32 @@ class Folder extends DesktopExtends{
 	constructor(num){
 		super();
 		this.num = num;
+		this.createFolder();
 	}
+
+	/** folder 만들기 */
 	createFolder(){
 		for(let i = 0; i < this.num; i++){
 			let icon = document.createElement('img');
 			icon.src = 'images/folder.png';
 			icon.alt = 'folder';
 			icon.setAttribute('class', 'folder');
-			document.querySelector('.current').querySelector('.wallpaper-inner').appendChild(icon);		
+			document.querySelector('.current').querySelector('.wallpaper-inner').append(icon);		
 		}
 	}
 };
 
 class Window{
 	/* TODO: Window 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
-	constructor(){
-		
+	constructor(array){
+		this.array = array;
+		this.doubleClick();
 	}
 
-	doubleClick(a){
-		a.forEach(function(c){
-			c.addEventListener('dblclick', function(){ 
+	/** folder창 만들기 */
+	doubleClick(){
+		this.array.forEach(function(box){
+			box.addEventListener('dblclick', function(){ 
 				folderWindow = document.createElement('div');
 				closeBtn = document.createElement('button');
 				folderWindow.setAttribute('class', 'folderWindow');
@@ -236,26 +250,26 @@ class Window{
 						lastX = e.clientX - startX; // 이동한 거리 x
 						lastY = e.clientY - startY; // 이동한 거리 y
 						
-						selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
-						selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";
-
 						startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
 						startY = e.clientY; 
+						
+						selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
+						selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";		
 					}
-				
 				}
+
 				function clickClose(btn){
 					btn.addEventListener('click', function(){
 						this.parentElement.style.display = 'none';	
 					});
 				}
+
 				movingIcon(folderWindow);
 				clickClose(closeBtn);
+
 			});	
 		});
 	}
-	
-
 };
 
 

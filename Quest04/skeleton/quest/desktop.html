@@ -21,22 +21,24 @@
 			let myDesktop = new Desktop(1);
 			myDesktop.setCreateMenubar();
 			myDesktop.setCreateInput();
-	
+			
 			let submitBtn1 =  document.querySelector('#folderSubmit');
 			let submitBtn2 =  document.querySelector('#iconSubmit');
-			let folderValue;
-			let iconValue;
+			
 			let myFolder;
 			let myIcon;
 			let myWindow;
-			let folderArr = [];
-			let iconArr = []; 
+			
 			let cnt = 1;
-			document.querySelector('#wallpaper1').classList += ' current'
 
+			document.querySelector('#wallpaper1').classList += ' current';
+			
 			tabPlus.addEventListener('click', function(){
-				cnt++
-				myDesktop = new Desktop(cnt);
+				// cnt++
+				// console.log(cnt);
+
+				eval('myDesktop'+ cnt+ `= new Desktop(${cnt})`); 
+				
 				wallpaper = [].slice.call(document.querySelectorAll('.wallpaper'));
 
 				for(let i = 0; i < tabListArr.length; i++){
@@ -49,28 +51,40 @@
 						});
 					})(i);
 				}
-			});
+			});     
 			
+			// let myDesktop3 = new Desktop(3);
 			
 			submitBtn1.addEventListener('click', function(){
-				folderValue = document.getElementById('folderConst').value;
+				folderValue = Number(document.getElementById('folderConst').value);
+				
+				if(isNaN(folderValue) || folderValue < 1){ // isNaN ==> 매개변수가 숫자가 아니면 true, 숫자이면 false를 반환
+					alert("1이상의 숫자만 입력해주세요!");
+					return
+				}
+				
 				myFolder = new Folder(folderValue);
-				myFolder.createFolder();
 
 				folderArr = document.querySelectorAll('.folder');
 				folderArr.forEach(myFolder.movingIcon);
 
-				myWindow = new Window();
-				myWindow.doubleClick(folderArr);
+				myWindow = new Window(folderArr);
 
 				document.getElementById('folderConst').value = '';
 				
 			});
+	
+			
 			
 			submitBtn2.addEventListener('click', function(){
-				iconValue = document.getElementById('iconConst').value;
+				iconValue = Number(document.getElementById('iconConst').value);
+
+				if(isNaN(iconValue) || iconValue < 1){ 
+					alert("1이상의 숫자만 입력해주세요!");
+					return
+				}
+
 				myIcon = new Icon(iconValue);
-				myIcon.createIcon();
 
 				iconArr = document.querySelectorAll('.file');
 				iconArr.forEach(myIcon.movingIcon);
