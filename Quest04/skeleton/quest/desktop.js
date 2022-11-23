@@ -21,9 +21,6 @@ let windowHeader = '';
 let closeBtn = '';
 let tabListArr = [];
 
-
-
-
 let header = document.createElement('header');
 header.setAttribute('class', 'header');
 desktop.before(header);
@@ -136,13 +133,6 @@ class DesktopExtends{
 			document.addEventListener('mousemove', onMove); 
 		});
 		
-		/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
-		function onRemoveEvent() { 
-			//selectIcon.style.position = 'fixed';
-			document.removeEventListener('mouseup', onRemoveEvent); 
-			document.removeEventListener('mousemove', onMove); 
-		} 
-		
 		function onMove(e) { 
 			e = e || window.event;
 			e.preventDefault(); 
@@ -158,6 +148,13 @@ class DesktopExtends{
 			selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
 			selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";
 		}
+
+		/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
+		function onRemoveEvent() { 
+			//selectIcon.style.position = 'fixed';
+			document.removeEventListener('mouseup', onRemoveEvent); 
+			document.removeEventListener('mousemove', onMove); 
+		} 
 	}
 }
 
@@ -201,9 +198,10 @@ class Folder extends DesktopExtends{
 	}
 };
 
-class Window{
+class Window extends DesktopExtends{
 	/* TODO: Window 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
 	constructor(array){
+		super();
 		this.array = array;
 		this.doubleClick();
 	}
@@ -214,12 +212,11 @@ class Window{
 			box.addEventListener('dblclick', function(){ 
 				folderWindow = document.createElement('div');
 				folderWindow.setAttribute('class', 'folder-window');
+				folderWindow.innerHTML = '<span>폴더입니다^^휴;;</span>';
 				
 				windowHeader = document.createElement('div');
 				windowHeader.setAttribute('class', 'window-header');
 				
-				folderWindow.innerHTML = '<span>폴더입니다^^휴;;</span>';
-
 				closeBtn = document.createElement('button');
 				closeBtn.setAttribute('class', 'close');
 				closeBtn.innerText = 'X';
@@ -240,21 +237,20 @@ class Window{
 						startX = e.clientX // 처음 파일 x좌표 - 클릭한 위치값
 						startY = e.clientY // 처음 파일 y좌표 - 클릭한 위치값
 						
-						
 						document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
 						document.addEventListener('mousemove', onMove); 
 					});
 					
 					/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
 					function onRemoveEvent() { 
-						folderWindow.style.position = 'fixed';
+						//folderWindow.style.position = 'fixed';
 						document.removeEventListener('mouseup', onRemoveEvent); 
 						document.removeEventListener('mousemove', onMove); 
 					} 
 					
 					function onMove(e) { 
 						e.preventDefault(); 
-						folderWindow.style.position = 'fixed';
+						//folderWindow.style.position = 'fixed';
 					
 						lastX = e.clientX - startX; // 이동한 거리 x
 						lastY = e.clientY - startY; // 이동한 거리 y
