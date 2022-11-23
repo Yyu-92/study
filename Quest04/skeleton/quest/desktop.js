@@ -20,6 +20,7 @@ let folderWindow = '';
 let windowHeader = '';
 let closeBtn = '';
 let tabListArr = [];
+let folderWindowArr = [];
 
 let header = document.createElement('header');
 header.setAttribute('class', 'header');
@@ -184,6 +185,7 @@ class Folder extends DesktopExtends{
 		super();
 		this.num = num;
 		this.createFolder();
+		this.createFolderWindow();
 	}
 
 	/** folder 만들기 */
@@ -194,6 +196,25 @@ class Folder extends DesktopExtends{
 			icon.alt = 'folder';
 			icon.setAttribute('class', 'folder');
 			document.querySelector('.current').querySelector('.wallpaper-inner').append(icon);		
+		}
+	}
+	createFolderWindow(){
+		for(let i = 0; i < this.num; i++){
+			folderWindow = document.createElement('div');
+			folderWindow.setAttribute('class', 'folder-window');
+			folderWindow.innerHTML = '<span>폴더입니다^^휴;;</span>';	
+			document.querySelector('.current').querySelector('.wallpaper-inner').append(folderWindow);
+
+			windowHeader = document.createElement('div');
+			windowHeader.setAttribute('class', 'window-header');	
+			folderWindow.append(windowHeader);
+
+			closeBtn = document.createElement('button');
+			closeBtn.setAttribute('class', 'close');
+			closeBtn.innerText = 'X';	
+			windowHeader.append(closeBtn);
+
+			folderWindowArr.push(folderWindow);
 		}
 	}
 };
@@ -208,72 +229,69 @@ class Window extends DesktopExtends{
 
 	/** folder창 만들기 */
 	doubleClick(){
-		this.array.forEach(function(box){
-			box.addEventListener('dblclick', function(){ 
-				folderWindow = document.createElement('div');
-				folderWindow.setAttribute('class', 'folder-window');
-				folderWindow.innerHTML = '<span>폴더입니다^^휴;;</span>';
+
+		for(let i = 0; i < this.array.length; i++){
+			(function(i){
+				this.array[i].addEventListener('dblclick',function(){
+					folderWindowArr[i].style.display = 'block';
+				});
+			})(i);
+		}
+		//this.array.forEach(function(box){
+			//box.addEventListener('dblclick', function(){ 
+				console.log(box);
+				//let folderIndex = this.array.indexOf(box);
 				
-				windowHeader = document.createElement('div');
-				windowHeader.setAttribute('class', 'window-header');
-				
-				closeBtn = document.createElement('button');
-				closeBtn.setAttribute('class', 'close');
-				closeBtn.innerText = 'X';
-				
-				this.parentElement.append(folderWindow);
-				folderWindow.append(windowHeader);
-				windowHeader.append(closeBtn);
 
-				function movingIcon(selectIcon){
-					selectIcon.addEventListener('mousedown', function(e){
-						e.preventDefault(); 
+				// function movingIcon(selectIcon){
+				// 	selectIcon.addEventListener('mousedown', function(e){
+				// 		e.preventDefault(); 
 						
-						/** 마우스 왼쪽클릭 0 / 오른쪽 2 / 휠 1 */
-						if(e.button !== 0){ 
-							return;
-						}
+				// 		/** 마우스 왼쪽클릭 0 / 오른쪽 2 / 휠 1 */
+				// 		if(e.button !== 0){ 
+				// 			return;
+				// 		}
 						
-						startX = e.clientX // 처음 파일 x좌표 - 클릭한 위치값
-						startY = e.clientY // 처음 파일 y좌표 - 클릭한 위치값
+				// 		startX = e.clientX // 처음 파일 x좌표 - 클릭한 위치값
+				// 		startY = e.clientY // 처음 파일 y좌표 - 클릭한 위치값
 						
-						document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
-						document.addEventListener('mousemove', onMove); 
-					});
+				// 		document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
+				// 		document.addEventListener('mousemove', onMove); 
+				// 	});
 					
-					/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
-					function onRemoveEvent() { 
-						//folderWindow.style.position = 'fixed';
-						document.removeEventListener('mouseup', onRemoveEvent); 
-						document.removeEventListener('mousemove', onMove); 
-					} 
+				// 	/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
+				// 	function onRemoveEvent() { 
+				// 		//folderWindow.style.position = 'fixed';
+				// 		document.removeEventListener('mouseup', onRemoveEvent); 
+				// 		document.removeEventListener('mousemove', onMove); 
+				// 	} 
 					
-					function onMove(e) { 
-						e.preventDefault(); 
-						//folderWindow.style.position = 'fixed';
+				// 	function onMove(e) { 
+				// 		e.preventDefault(); 
+				// 		//folderWindow.style.position = 'fixed';
 					
-						lastX = e.clientX - startX; // 이동한 거리 x
-						lastY = e.clientY - startY; // 이동한 거리 y
+				// 		lastX = e.clientX - startX; // 이동한 거리 x
+				// 		lastY = e.clientY - startY; // 이동한 거리 y
 						
-						startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
-						startY = e.clientY; 
+				// 		startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
+				// 		startY = e.clientY; 
 						
-						folderWindow.style.left = (folderWindow.offsetLeft + lastX)+"px";
-						folderWindow.style.top = (folderWindow.offsetTop + lastY)+"px";		
-					}
-				}
+				// 		folderWindow.style.left = (folderWindow.offsetLeft + lastX)+"px";
+				// 		folderWindow.style.top = (folderWindow.offsetTop + lastY)+"px";		
+				// 	}
+				// }
 
-				function clickClose(btn){
-					btn.addEventListener('click', function(){
-						this.parentElement.parentElement.style.display = 'none';	
-					});
-				}
+				// function clickClose(btn){
+				// 	btn.addEventListener('click', function(){
+				// 		this.parentElement.parentElement.style.display = 'none';	
+				// 	});
+				// }
 
-				movingIcon(windowHeader);
-				clickClose(closeBtn);
+				// movingIcon(windowHeader);
+				// clickClose(closeBtn);
 
-			});	
-		});
+			//});	
+		//});
 	}
 };
 
