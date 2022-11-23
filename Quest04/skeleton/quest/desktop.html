@@ -34,7 +34,7 @@
 			document.querySelector('#wallpaper1').classList += ' current';
 			
 			tabPlus.addEventListener('click', function(){
-				// cnt++
+				cnt++
 				// console.log(cnt);
 
 				eval('myDesktop'+ cnt+ `= new Desktop(${cnt})`); 
@@ -57,7 +57,8 @@
 			
 			submitBtn1.addEventListener('click', function(){
 				folderValue = Number(document.getElementById('folderConst').value);
-				
+				document.getElementById('folderConst').value = '';
+
 				if(isNaN(folderValue) || folderValue < 1){ // isNaN ==> 매개변수가 숫자가 아니면 true, 숫자이면 false를 반환
 					alert("1이상의 숫자만 입력해주세요!");
 					return
@@ -68,16 +69,14 @@
 				folderArr = document.querySelectorAll('.folder');
 				folderArr.forEach(myFolder.movingIcon);
 
-				myWindow = new Window(folderArr);
-
-				document.getElementById('folderConst').value = '';
-				
+				myWindow = new Window(folderArr);	
 			});
 	
 			
 			
 			submitBtn2.addEventListener('click', function(){
 				iconValue = Number(document.getElementById('iconConst').value);
+				document.getElementById('iconConst').value = '';
 
 				if(isNaN(iconValue) || iconValue < 1){ 
 					alert("1이상의 숫자만 입력해주세요!");
@@ -88,8 +87,6 @@
 
 				iconArr = document.querySelectorAll('.file');
 				iconArr.forEach(myIcon.movingIcon);
-
-				document.getElementById('iconConst').value = '';
 			});
 
 			

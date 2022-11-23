@@ -1,8 +1,9 @@
 let desktop = document.getElementsByClassName('desktop')[0];
-let folderValue;
-let iconValue;
+let folderValue = 0;
+let iconValue = 0;
 let folderArr = [];
 let iconArr = []; 
+let icon ='';
 let lastX = 0;
 let lastY = 0; 
 let startX = 0; 
@@ -16,8 +17,11 @@ let tabClose = '';
 let inputArea = '';
 let submitBtn = '';
 let folderWindow = '';
+let windowHeader = '';
 let closeBtn = '';
 let tabListArr = [];
+
+
 
 
 let header = document.createElement('header');
@@ -32,8 +36,6 @@ class Desktop {
 	/* TODO: Desktop 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
 	constructor(indexNum){
 		this.indexNum = indexNum;
-		// this.btn1 = btn1;
-		// this.btn2 = btn2;
 		this.start();
 	}
 
@@ -170,7 +172,7 @@ class Icon extends DesktopExtends{
 	/** icon 만들기*/
 	createIcon(){
 		for(let i = 0; i < this.num; i++){
-			let icon = document.createElement('img');
+			icon = document.createElement('img');
 			icon.src = 'images/file.png';
 			icon.alt = 'file';
 			icon.setAttribute('class', 'file');
@@ -190,7 +192,7 @@ class Folder extends DesktopExtends{
 	/** folder 만들기 */
 	createFolder(){
 		for(let i = 0; i < this.num; i++){
-			let icon = document.createElement('img');
+			icon = document.createElement('img');
 			icon.src = 'images/folder.png';
 			icon.alt = 'folder';
 			icon.setAttribute('class', 'folder');
@@ -211,13 +213,20 @@ class Window{
 		this.array.forEach(function(box){
 			box.addEventListener('dblclick', function(){ 
 				folderWindow = document.createElement('div');
+				folderWindow.setAttribute('class', 'folder-window');
+				
+				windowHeader = document.createElement('div');
+				windowHeader.setAttribute('class', 'window-header');
+				
+				folderWindow.innerHTML = '<span>폴더입니다^^휴;;</span>';
+
 				closeBtn = document.createElement('button');
-				folderWindow.setAttribute('class', 'folderWindow');
-				folderWindow.innerText = '폴더입니다^^휴;;';
-				this.parentElement.append(folderWindow);
 				closeBtn.setAttribute('class', 'close');
 				closeBtn.innerText = 'X';
-				folderWindow.append(closeBtn);
+				
+				this.parentElement.append(folderWindow);
+				folderWindow.append(windowHeader);
+				windowHeader.append(closeBtn);
 
 				function movingIcon(selectIcon){
 					selectIcon.addEventListener('mousedown', function(e){
@@ -238,14 +247,14 @@ class Window{
 					
 					/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
 					function onRemoveEvent() { 
-						selectIcon.style.position = 'fixed';
+						folderWindow.style.position = 'fixed';
 						document.removeEventListener('mouseup', onRemoveEvent); 
 						document.removeEventListener('mousemove', onMove); 
 					} 
 					
 					function onMove(e) { 
 						e.preventDefault(); 
-						selectIcon.style.position = 'fixed';
+						folderWindow.style.position = 'fixed';
 					
 						lastX = e.clientX - startX; // 이동한 거리 x
 						lastY = e.clientY - startY; // 이동한 거리 y
@@ -253,18 +262,18 @@ class Window{
 						startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
 						startY = e.clientY; 
 						
-						selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
-						selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";		
+						folderWindow.style.left = (folderWindow.offsetLeft + lastX)+"px";
+						folderWindow.style.top = (folderWindow.offsetTop + lastY)+"px";		
 					}
 				}
 
 				function clickClose(btn){
 					btn.addEventListener('click', function(){
-						this.parentElement.style.display = 'none';	
+						this.parentElement.parentElement.style.display = 'none';	
 					});
 				}
 
-				movingIcon(folderWindow);
+				movingIcon(windowHeader);
 				clickClose(closeBtn);
 
 			});	
