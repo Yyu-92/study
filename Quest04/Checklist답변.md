@@ -18,13 +18,15 @@
 클래스 외부에서 접근할 수 없는 속성이라는 에러 메시지가 출력되고  
 <br>
 외부에 getName()이라는 getter를 노출해 #me의 값에 접근할 수 있게 된다.
+
 <br>
 
 ![screenshot](images/script2.png)
 
 <br>
 
-* private 속성은 클래스 별로 독립적인 공간을 갖게 한다. 쉽게 말하면 Human클래스 스코프의 #me과 Person클래스 스코프의 #me는 다르다는 것이다. 
+* private 속성은 클래스 별로 독립적인 공간을 갖게 한다. 쉽게 말하면 Human클래스 스코프의 #me과 Person클래스 스코프의 #me는 다르다는 것이다.  
+ 
 **public**
 <br>
 
