@@ -1,31 +1,37 @@
 let desktop = document.getElementsByClassName('desktop')[0];
-let folderValue = 0;
-let iconValue = 0;
-let folderArr = [];
-let iconArr = []; 
-let icon ='';
-let lastX = 0;
-let lastY = 0; 
-let startX = 0; 
-let startY = 0;
+
+/** 바탕화면과 메뉴탭 관련 변수들 */
 let wallpaper = ''; 
 let wallpaperInner = '';
 let menuBar = '';
 let tabPlus = '';
 let tabList = '';
+let tabListArr = [];
 let tabClose = '';
+let tabCloseBtnArr = [];
+
+/** icon 변수들 */
+let icon ='';
+let iconArr = []; 
+let folderArr = [];
+
+/** input 관련 변수들 */
 let inputArea = '';
 let submitBtn = '';
+
+/** folderWindow 관련 변수들 */
 let folderWindow = '';
+let folderWindowArr = [];
 let windowHeader = '';
 let closeBtn = '';
-let tabListArr = [];
-let folderWindowArr = [];
+let windowCloseBtnArr = [];
 
+/** header 생성 */
 let header = document.createElement('header');
 header.setAttribute('class', 'header');
 desktop.before(header);
 
+/** tabBar 생성 */
 let tabBar = document.createElement('div');
 tabBar.setAttribute('class', 'tab-bar');
 header.append(tabBar);
@@ -38,30 +44,47 @@ class Desktop {
 	}
 
 	start(){
-		this.setCreateTab();
-		this.setCreateWallpaper();
-		this.setCreatePlusBtn();
+		this.createTab();
+		this.createPlusBtn();
+		//this.removeTab();
+		this.createWallpaper();
+		this.createMenubar();
+		this.createInput();
 	}
 
 	/** tab 만들기 */
-	setCreateTab(){
+	createTab(){
 		tabList = document.createElement('a');
 		tabList.setAttribute('class', 'tablist');
 		tabList.setAttribute('id', 'tablist'+this.indexNum);
 		tabList.innerText = '유진의 바탕화면👀';
+		tabBar.append(tabList);
+		tabListArr.push(tabList);
 
 		tabClose = document.createElement('button');	
 		tabClose.setAttribute('class', 'tabclose');
 		tabClose.innerText = 'X';
-		
-		tabBar.append(tabList);
 		tabList.append(tabClose);
-		tabListArr.push(tabList);
-		
+		tabCloseBtnArr.push(tabClose);	
 	}
 
+	/** tab 삭제하기 */
+	// removeTab(){
+	// 	for(let i = 0; i < tabCloseBtnArr.length; i++){
+	// 		(function(i){
+	// 			tabCloseBtnArr[i].addEventListener('click', function(e){
+	// 				e.preventDefault();
+	// 				tabList[i].remove();
+	// 				wallpaper[i].remove();
+	// 				//document.querySelector(`#wallpaper${tabListIndex}`).remove();
+	// 				console.log(i);
+	// 			});
+	// 		})(i);
+	// 	}
+	// }
+
 	/** tab 플러스 버튼 만들기 */
-	setCreatePlusBtn(){
+	createPlusBtn(){
 		tabPlus = document.createElement('button');
 		tabPlus.setAttribute('class', 'tabplus');
 		tabPlus.innerText = '+'
@@ -69,22 +92,21 @@ class Desktop {
 	}
 
 	/** 바탕화면 만들기 */
-	setCreateWallpaper(){
+	createWallpaper(){
 		wallpaper = document.createElement('a');
 		wallpaper.setAttribute('class', 'wallpaper');
 		wallpaper.setAttribute('id', 'wallpaper'+this.indexNum);
+		desktop.append(wallpaper);
 
 		wallpaperInner = document.createElement('div');
 		wallpaperInner.setAttribute('class', 'wallpaper-inner');
 		wallpaperInner.setAttribute('id', 'wallpaper-inner'+this.indexNum);
-		wallpaperInner.innerHTML = `<p> 🐬 바탕화면 ${this.indexNum} 입니다^^ 🐬 </p>`;
-	
-		desktop.append(wallpaper);
+		wallpaperInner.innerHTML = `<p>  바탕화면 ${this.indexNum} 입니다^^  </p>`;
 		wallpaper.append(wallpaperInner);
 	}
 
 	/** menubar 만들기 */
-	setCreateMenubar(){
+	createMenubar(){
 		menuBar = document.createElement('div');
 		menuBar.setAttribute('class', 'menu-bar');
 		menuBar.setAttribute('id', 'menu-bar'+this.indexNum);
@@ -92,20 +114,19 @@ class Desktop {
 	}
 
 	/** input 만들기 */
-	setCreateInput(){
+	createInput(){
 		for(let i = 0; i < 2; i++){
 			inputArea = document.createElement('input');
 			inputArea.type = 'text';
 			inputArea.class = 'constructor';
 			inputArea.id = (i == 0) ? 'folderConst' : 'iconConst';
-			inputArea.placeholder = (i == 0) ? '폴더 갯수를 입력해주세요.' : '아이콘 갯수를 입력해주세요.';
-	
+			inputArea.placeholder = (i == 0) ? '폴더 개수를 입력해 주세요.' : '아이콘 개수를 입력해 주세요.';
+			menuBar.append(inputArea);
+
 			submitBtn = document.createElement('input');
 			submitBtn.type = 'submit';
 			submitBtn.value = '생성';
 			submitBtn.id = (i == 0) ? 'folderSubmit' : 'iconSubmit';
-	
-			menuBar.append(inputArea);
 			menuBar.append(submitBtn);
 		}
 	}
@@ -118,9 +139,13 @@ class DesktopExtends{
 	
 	/** 드래그 기능 */
 	movingIcon(selectIcon){
+		let lastX = 0;
+		let lastY = 0; 
+		let startX = 0; 
+		let startY = 0;
+
 		selectIcon.addEventListener('mousedown', function(e){
-			e = e || window.event;
-			e.preventDefault(); 
+			e.preventDefault(); // 정상적인 구현을 위한 디폴트 이벤트 제거
 			
 			/** 마우스 왼쪽클릭 0 / 오른쪽 2 / 휠 1 */
 			if(e.button !== 0){ 
@@ -135,19 +160,18 @@ class DesktopExtends{
 		});
 		
 		function onMove(e) { 
-			e = e || window.event;
 			e.preventDefault(); 
 			
 			selectIcon.style.position = 'fixed';
 			
 			lastX = e.clientX - startX; // 이동한 거리 x
 			lastY = e.clientY - startY; // 이동한 거리 y
-			
-			startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
-			startY = e.clientY; 
 
 			selectIcon.style.left = (selectIcon.offsetLeft + lastX)+"px";
 			selectIcon.style.top = (selectIcon.offsetTop + lastY)+"px";
+
+			startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
+			startY = e.clientY;
 		}
 
 		/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
@@ -175,6 +199,10 @@ class Icon extends DesktopExtends{
 			icon.alt = 'file';
 			icon.setAttribute('class', 'file');
 			document.querySelector('.current').querySelector('.wallpaper-inner').append(icon);	
+			
+			iconArr = document.querySelectorAll('.file');
+			
+			document.getElementById('iconConst').value = '';
 		}
 	}
 }
@@ -195,14 +223,20 @@ class Folder extends DesktopExtends{
 			icon.src = 'images/folder.png';
 			icon.alt = 'folder';
 			icon.setAttribute('class', 'folder');
-			document.querySelector('.current').querySelector('.wallpaper-inner').append(icon);		
+			document.querySelector('.current').querySelector('.wallpaper-inner').append(icon);	
+			
+			folderArr = document.querySelectorAll('.folder');
+
+			document.getElementById('folderConst').value = '';
 		}
 	}
+
+	/** folderWindow 만들기 */
 	createFolderWindow(){
 		for(let i = 0; i < this.num; i++){
 			folderWindow = document.createElement('div');
 			folderWindow.setAttribute('class', 'folder-window');
-			folderWindow.innerHTML = '<span>폴더입니다^^휴;;</span>';	
+			folderWindow.innerHTML = '<span>폴더입니다🤨</span>';	
 			document.querySelector('.current').querySelector('.wallpaper-inner').append(folderWindow);
 
 			windowHeader = document.createElement('div');
@@ -215,106 +249,52 @@ class Folder extends DesktopExtends{
 			windowHeader.append(closeBtn);
 
 			folderWindowArr.push(folderWindow);
+			windowCloseBtnArr.push(closeBtn);
 		}
 	}
 };
 
 class Window extends DesktopExtends{
 	/* TODO: Window 클래스는 어떤 멤버함수와 멤버변수를 가져야 할까요? */
-	constructor(array){
+	constructor(){
 		super();
-		this.array = array;
 		this.doubleClick();
+		this.clickClose();
+		this.clickFolderWindow();
 	}
-
-	/** folder창 만들기 */
+	
+	/** folderWindow 생성 */
 	doubleClick(){
-
-		for(let i = 0; i < this.array.length; i++){
+		for(let i = 0; i < folderArr.length; i++){
 			(function(i){
-				this.array[i].addEventListener('dblclick',function(){
+				folderArr[i].addEventListener('dblclick',function(){
 					folderWindowArr[i].style.display = 'block';
 				});
 			})(i);
 		}
-		//this.array.forEach(function(box){
-			//box.addEventListener('dblclick', function(){ 
-				console.log(box);
-				//let folderIndex = this.array.indexOf(box);
-				
+	}
 
-				// function movingIcon(selectIcon){
-				// 	selectIcon.addEventListener('mousedown', function(e){
-				// 		e.preventDefault(); 
-						
-				// 		/** 마우스 왼쪽클릭 0 / 오른쪽 2 / 휠 1 */
-				// 		if(e.button !== 0){ 
-				// 			return;
-				// 		}
-						
-				// 		startX = e.clientX // 처음 파일 x좌표 - 클릭한 위치값
-				// 		startY = e.clientY // 처음 파일 y좌표 - 클릭한 위치값
-						
-				// 		document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
-				// 		document.addEventListener('mousemove', onMove); 
-				// 	});
-					
-				// 	/** 클릭을 해제했을 때 객체가 이동이 되면 안되므로 함수들 해제*/
-				// 	function onRemoveEvent() { 
-				// 		//folderWindow.style.position = 'fixed';
-				// 		document.removeEventListener('mouseup', onRemoveEvent); 
-				// 		document.removeEventListener('mousemove', onMove); 
-				// 	} 
-					
-				// 	function onMove(e) { 
-				// 		e.preventDefault(); 
-				// 		//folderWindow.style.position = 'fixed';
-					
-				// 		lastX = e.clientX - startX; // 이동한 거리 x
-				// 		lastY = e.clientY - startY; // 이동한 거리 y
-						
-				// 		startX = e.clientX; //원래 위치값도 옮겨줘야함 (3번쨰로 옮기면 2번째로 옮겨진 그 위치가 원래 위치값이 되니까 )
-				// 		startY = e.clientY; 
-						
-				// 		folderWindow.style.left = (folderWindow.offsetLeft + lastX)+"px";
-				// 		folderWindow.style.top = (folderWindow.offsetTop + lastY)+"px";		
-				// 	}
-				// }
+	/** folderWindow 클릭시 해당 폴더가 가장 위로 */
+	clickFolderWindow(){	
+		folderWindowArr.forEach(function(f){
+			f.addEventListener('click',function(){
+				for(let i = 0; i < folderWindowArr.length; i++){
+					folderWindowArr[i].classList.remove('active');
+				}
+				this.classList.add('active');
+			});
+		});
+	}
 
-				// function clickClose(btn){
-				// 	btn.addEventListener('click', function(){
-				// 		this.parentElement.parentElement.style.display = 'none';	
-				// 	});
-				// }
-
-				// movingIcon(windowHeader);
-				// clickClose(closeBtn);
-
-			//});	
-		//});
+	/** folderWindow 끄기 */
+	clickClose(){
+		windowCloseBtnArr.forEach(function(c){
+			c.addEventListener('click', function(){
+				this.parentElement.parentElement.style.display = 'none';
+			});
+		});
 	}
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

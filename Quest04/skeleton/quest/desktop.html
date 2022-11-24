@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="./desktop.css">
+
+		<title>유진이의 바탕화면</title>
 	</head>
 	<body>
 		<section class="desktop">
@@ -18,26 +20,19 @@
 				
 			// );
 			
-			let myDesktop = new Desktop(1);
-			myDesktop.setCreateMenubar();
-			myDesktop.setCreateInput();
+			let cnt = 1;
+			let myDesktop = new Desktop(cnt);
 			
 			let submitBtn1 =  document.querySelector('#folderSubmit');
 			let submitBtn2 =  document.querySelector('#iconSubmit');
 			
-			let myFolder;
-			let myIcon;
-			let myWindow;
-			
-			let cnt = 1;
-
 			document.querySelector('#wallpaper1').classList += ' current';
 			
 			tabPlus.addEventListener('click', function(){
-				cnt++
-				// console.log(cnt);
-
-				eval('myDesktop'+ cnt+ `= new Desktop(${cnt})`); 
+				//eval('myDesktop'+ cnt+ `= new Desktop(${cnt})`);
+				myDesktop.indexNum++;
+				myDesktop.createTab();
+				myDesktop.createWallpaper();
 				
 				wallpaper = [].slice.call(document.querySelectorAll('.wallpaper'));
 
@@ -52,56 +47,35 @@
 					})(i);
 				}
 			});     
-			
-			// let myDesktop3 = new Desktop(3);
-			
+	
 			submitBtn1.addEventListener('click', function(){
-				folderValue = Number(document.getElementById('folderConst').value);
-				document.getElementById('folderConst').value = '';
+				let folderValue = Number(document.getElementById('folderConst').value);
 
 				if(isNaN(folderValue) || folderValue < 1){ // isNaN ==> 매개변수가 숫자가 아니면 true, 숫자이면 false를 반환
 					alert("1이상의 숫자만 입력해주세요!");
 					return
 				}
 				
-				myFolder = new Folder(folderValue);
+				let myFolder = new Folder(folderValue);
 
-				folderArr = document.querySelectorAll('.folder');
 				folderArr.forEach(myFolder.movingIcon);
-
-				myWindow = new Window(folderArr);	
+				
+				let myWindow = new Window();
+				folderWindowArr.forEach(myWindow.movingIcon);
 
 			});
 	
-			
-			
 			submitBtn2.addEventListener('click', function(){
-				iconValue = Number(document.getElementById('iconConst').value);
-				document.getElementById('iconConst').value = '';
-
+				let iconValue = Number(document.getElementById('iconConst').value);
+				
 				if(isNaN(iconValue) || iconValue < 1){ 
 					alert("1이상의 숫자만 입력해주세요!");
 					return
 				}
 
-				myIcon = new Icon(iconValue);
-
-				iconArr = document.querySelectorAll('.file');
+				let myIcon = new Icon(iconValue);
 				iconArr.forEach(myIcon.movingIcon);
 			});
-
-			
-
-			
-		
-			
-			
-
-			
-
-
-		
-			
 			
 		</script>	
 
