@@ -25,7 +25,8 @@ figure{margin:0;}
 .tabclose{font-size:11px;font-weight:bold;border-radius:50%;width:19px;height:19px;transition:all 0.4s;position:relative;z-index:600;}
 .tabclose:hover{background:#eee;}
 
-img{height:85px;/*margin:5px 10px;*/box-sizing:border-box;padding:10px 15px;position:relative;}
+img{height:85px;/*margin:5px 10px;*/box-sizing:border-box;padding:10px 15px;position:relative;z-index:500;}
+img.active{z-index:501;}
 img:hover{border:1px solid rgba(255,255,255,0.3);background-color:#d9858633;}
 
 .menu-bar{position:absolute;bottom:0;background:#d98586;width:100%;padding:13px 25px;box-sizing:border-box;display:flex;justify-content:center;}

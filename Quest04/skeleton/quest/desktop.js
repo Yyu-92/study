@@ -14,6 +14,7 @@ let tabCloseBtnArr = [];
 let icon ='';
 let iconArr = []; 
 let folderArr = [];
+let iconFolderArr = [];
 
 /** input 관련 변수들 */
 let inputArea = '';
@@ -134,7 +135,7 @@ class Desktop {
 
 class DesktopExtends{
 	constructor(){
-
+		
 	}
 	
 	/** 드래그 기능 */
@@ -181,6 +182,20 @@ class DesktopExtends{
 			document.removeEventListener('mousemove', onMove); 
 		} 
 	}
+
+	/** 클릭시 해당 요소가 가장 위로 */
+	clickUp(upItemArr){	
+		upItemArr.forEach(function(f){
+			f.addEventListener('mousedown',function(){
+				for(let i = 0; i < upItemArr.length; i++){
+					upItemArr[i].classList.remove('active');
+				}
+				this.classList.add('active');
+			});
+
+			//document.removeEventListener('mouseup', onRemoveEvent); 
+		});
+	}
 }
 
 class Icon extends DesktopExtends{
@@ -189,6 +204,7 @@ class Icon extends DesktopExtends{
 		super();
 		this.num = num;
 		this.createIcon();
+		super.clickUp(iconFolderArr);
 	}
 
 	/** icon 만들기*/
@@ -199,8 +215,9 @@ class Icon extends DesktopExtends{
 			icon.alt = 'file';
 			icon.setAttribute('class', 'file');
 			document.querySelector('.current').querySelector('.wallpaper-inner').append(icon);	
-			
-			iconArr = document.querySelectorAll('.file');
+			iconArr.push(icon);
+
+			iconFolderArr.push(icon);
 			
 			document.getElementById('iconConst').value = '';
 		}
@@ -214,6 +231,7 @@ class Folder extends DesktopExtends{
 		this.num = num;
 		this.createFolder();
 		this.createFolderWindow();
+		super.clickUp(iconFolderArr);
 	}
 
 	/** folder 만들기 */
@@ -224,8 +242,9 @@ class Folder extends DesktopExtends{
 			icon.alt = 'folder';
 			icon.setAttribute('class', 'folder');
 			document.querySelector('.current').querySelector('.wallpaper-inner').append(icon);	
-			
-			folderArr = document.querySelectorAll('.folder');
+			folderArr.push(icon);
+
+			iconFolderArr.push(icon);
 
 			document.getElementById('folderConst').value = '';
 		}
@@ -238,6 +257,7 @@ class Folder extends DesktopExtends{
 			folderWindow.setAttribute('class', 'folder-window');
 			folderWindow.innerHTML = '<span>폴더입니다🤨</span>';	
 			document.querySelector('.current').querySelector('.wallpaper-inner').append(folderWindow);
+			folderWindowArr.push(folderWindow);
 
 			windowHeader = document.createElement('div');
 			windowHeader.setAttribute('class', 'window-header');	
@@ -247,8 +267,6 @@ class Folder extends DesktopExtends{
 			closeBtn.setAttribute('class', 'close');
 			closeBtn.innerText = 'X';	
 			windowHeader.append(closeBtn);
-
-			folderWindowArr.push(folderWindow);
 			windowCloseBtnArr.push(closeBtn);
 		}
 	}
@@ -260,30 +278,16 @@ class Window extends DesktopExtends{
 		super();
 		this.doubleClick();
 		this.clickClose();
-		this.clickFolderWindow();
+		super.clickUp(folderWindowArr);
 	}
 	
 	/** folderWindow 생성 */
 	doubleClick(){
 		for(let i = 0; i < folderArr.length; i++){
-			(function(i){
-				folderArr[i].addEventListener('dblclick',function(){
-					folderWindowArr[i].style.display = 'block';
-				});
-			})(i);
-		}
-	}
-
-	/** folderWindow 클릭시 해당 폴더가 가장 위로 */
-	clickFolderWindow(){	
-		folderWindowArr.forEach(function(f){
-			f.addEventListener('click',function(){
-				for(let i = 0; i < folderWindowArr.length; i++){
-					folderWindowArr[i].classList.remove('active');
-				}
-				this.classList.add('active');
+			folderArr[i].addEventListener('dblclick',function(){
+				folderWindowArr[i].style.display = 'block';
 			});
-		});
+		}
 	}
 
 	/** folderWindow 끄기 */
@@ -294,6 +298,7 @@ class Window extends DesktopExtends{
 			});
 		});
 	}
+
 };
 
 
