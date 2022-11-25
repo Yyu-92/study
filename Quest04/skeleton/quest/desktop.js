@@ -3,6 +3,7 @@ let desktop = document.getElementsByClassName('desktop')[0];
 /** 바탕화면과 메뉴탭 관련 변수들 */
 let wallpaper = ''; 
 let wallpaperInner = '';
+let wallpaperArr = [];
 let menuBar = '';
 let tabPlus = '';
 let tabList = '';
@@ -58,7 +59,7 @@ class Desktop {
 		tabList = document.createElement('a');
 		tabList.setAttribute('class', 'tablist');
 		tabList.setAttribute('id', 'tablist'+this.indexNum);
-		tabList.innerText = '유진의 바탕화면👀';
+		tabList.innerHTML = `<p> 바탕화면👀${this.indexNum} </p>`;
 		tabBar.append(tabList);
 		tabListArr.push(tabList);
 
@@ -70,19 +71,24 @@ class Desktop {
 	}
 
 	/** tab 삭제하기 */
-	// removeTab(){
-	// 	for(let i = 0; i < tabCloseBtnArr.length; i++){
-	// 		(function(i){
-	// 			tabCloseBtnArr[i].addEventListener('click', function(e){
-	// 				e.preventDefault();
-	// 				tabList[i].remove();
-	// 				wallpaper[i].remove();
-	// 				//document.querySelector(`#wallpaper${tabListIndex}`).remove();
-	// 				console.log(i);
-	// 			});
-	// 		})(i);
-	// 	}
-	// }
+	removeTab(){
+		// for(let i = 0; i < tabCloseBtnArr.length; i++){
+		// 	tabCloseBtnArr[i].addEventListener('click', function(e){
+		// 		e.preventDefault();
+		// 		tabListArr[i].remove();
+		// 		wallpaperArr[i].remove();
+
+		// 		tabListArr.splice(i, 1);
+		// 		tabCloseBtnArr.splice(i, 1);
+		// 		wallpaperArr.splice(i, 1);
+				
+		// 		for(let j = 0; j < wallpaperArr.length; j++){
+		// 			wallpaperArr[j].classList.remove('current');
+		// 		}
+		// 		wallpaperArr[i-1].classList.add('current');
+		// 	});
+		// }
+	}
 
 	/** tab 플러스 버튼 만들기 */
 	createPlusBtn(){
@@ -98,6 +104,7 @@ class Desktop {
 		wallpaper.setAttribute('class', 'wallpaper');
 		wallpaper.setAttribute('id', 'wallpaper'+this.indexNum);
 		desktop.append(wallpaper);
+		wallpaperArr.push(wallpaper);
 
 		wallpaperInner = document.createElement('div');
 		wallpaperInner.setAttribute('class', 'wallpaper-inner');
@@ -152,10 +159,16 @@ class DesktopExtends{
 			if(e.button !== 0){ 
 				return;
 			}
+
+			if(e.clientX < 0){
+				return;
+			}
+		
 			
 			startX = e.clientX // 처음 파일 x좌표 - 클릭한 위치값
 			startY = e.clientY // 처음 파일 y좌표 - 클릭한 위치값
-		
+
+			
 			document.addEventListener('mouseup', onRemoveEvent); // 마우스 클릭을 멈췄을 때, 내부에서 이벤트를 해체하는 함수를 바인딩
 			document.addEventListener('mousemove', onMove); 
 		});

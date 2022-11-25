@@ -21,6 +21,7 @@ figure{margin:0;}
 
 .tab-bar{max-width:1500px;position:relative;display:inline-flex;padding-right:38px;}
 .tablist{display:block;width:143px;transition:all 0.4s;height:35px;border:1px solid #d98586;border-bottom:none;border-radius:0 10px 0 0;font-size:14px;display:flex;align-items:center;justify-content:space-between;padding:0 5px 0 10px;box-sizing:border-box;cursor:pointer;}
+.tablist p{padding-right:30px;line-height:35px;}
 .tabplus{width:25px;height:25px;border-radius:50%;color:#fff;background:#d98586;font-size:20px;position:absolute;right:0;top:50%;transform:translateY(-50%);}
 .tabclose{font-size:11px;font-weight:bold;border-radius:50%;width:19px;height:19px;transition:all 0.4s;position:relative;z-index:600;}
 .tabclose:hover{background:#eee;}

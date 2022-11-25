@@ -33,18 +33,16 @@
 				myDesktop.indexNum++;
 				myDesktop.createTab();
 				myDesktop.createWallpaper();
-				
-				wallpaper = document.querySelectorAll('.wallpaper');
+				myDesktop.removeTab();
 
+				/** 현재 바탕화면 current */
 				for(let i = 0; i < tabListArr.length; i++){
-					(function(i){
-						tabListArr[i].addEventListener('click', function(){
-							for(let j = 0; j < wallpaper.length; j++){
-								wallpaper[j].classList.remove('current');
-							}
-							wallpaper[i].classList.add('current');
-						});
-					})(i);
+					tabListArr[i].querySelector('p').addEventListener('click', function(){
+						for(let j = 0; j < wallpaperArr.length; j++){
+							wallpaperArr[j].classList.remove('current');
+						}
+						wallpaperArr[i].classList.add('current');
+					});
 				}
 			});     
 	
@@ -53,7 +51,7 @@
 
 				if(isNaN(folderValue) || folderValue < 1){ // isNaN ==> 매개변수가 숫자가 아니면 true, 숫자이면 false를 반환
 					alert("1이상의 숫자만 입력해주세요!");
-					return
+					return;
 				}
 				
 				let myFolder = new Folder(folderValue);
@@ -70,7 +68,7 @@
 				
 				if(isNaN(iconValue) || iconValue < 1){ 
 					alert("1이상의 숫자만 입력해주세요!");
-					return
+					return;
 				}
 
 				let myIcon = new Icon(iconValue);
