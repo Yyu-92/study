@@ -29,24 +29,34 @@ let userBingo = [];
 /** userBingo 생성 */
 function createUserBingo(){
 	for(let i = 0; i < 25; i++){
-		userBingo[i] = document.getElementById('num' + i).value;
+		let userNum = document.getElementById('num' + i).value;
+		if((1 > userNum || userNum > 25) || isNaN(Number(userNum))){
+			alert('1~25사이의 숫자가 아닙니다.')
+			return;
+		}
+		if(userBingo.indexOf(userNum) !== userBingo.lastIndexOf(userNum)){
+			alert('중복된 숫자가 있습니다.');
+			return;
+		}
+		userBingo[i] = userNum;
 	}
 	
 	console.log("userBingo : " + userBingo);
 }
 
 
+
 document.getElementById('submit-btn').addEventListener('click', function(){
 	createUserBingo();
 
-	let result = document.querySelector('.result').value;
-	let resultIndex = userBingo.indexOf(result);
+	// let result = document.querySelector('.result').value;
+	// let resultIndex = userBingo.indexOf(result);
 	
-	/** 빙고 지우기 */
-	document.getElementById('num' + resultIndex).value = 'X';
-	document.getElementById('num' + resultIndex).style.fontSize = '55px';
+	// /** 빙고 지우기 */
+	// document.getElementById('num' + resultIndex).value = 'X';
+	// document.getElementById('num' + resultIndex).style.fontSize = '55px';
 
-	/** 등록값 초기화 */
-	document.querySelector('.result').value = '';
+	// /** 등록값 초기화 */
+	// document.querySelector('.result').value = '';
 });
 
